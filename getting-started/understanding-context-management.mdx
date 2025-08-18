@@ -1,31 +1,31 @@
 ---
 title: "Context Management"
-description: "Context is key to getting the most out of Cline"
+description: "Context is key to getting the most out of Sixth"
 ---
 
 > 💡 **Quick Reference**
 >
-> -   Context = The information Cline knows about your project
-> -   Context Window = How much information Cline can hold at once
+> -   Context = The information Sixth knows about your project
+> -   Context Window = How much information Sixth can hold at once
 > -   Use context files to maintain project knowledge
 > -   Reset when the context window gets full
 
 ## Understanding Context & Context Windows
 
-<Frame caption="In a world of infinite context, the context window is what Cline currently has available">
+<Frame caption="In a world of infinite context, the context window is what Sixth currently has available">
 	<img
-		src="https://storage.googleapis.com/cline_public_images/docs/assets/image%20(2).png"
-		alt="In a world of infinite context, the context window is what Cline currently has available"
+		src="https://storage.googleapis.com/sixth_public_images/docs/assets/image%20(2).png"
+		alt="In a world of infinite context, the context window is what Sixth currently has available"
 	/>
 </Frame>
 
-Think of working with Cline like collaborating with a thorough, proactive teammate:
+Think of working with Sixth like collaborating with a thorough, proactive teammate:
 
 ### How Context is Built
 
-Cline actively builds context in two ways:
+Sixth actively builds context in two ways:
 
-1. **Automatic Context Gathering (i.e. Cline-driven)**
+1. **Automatic Context Gathering (i.e. Sixth-driven)**
     - Proactively reads related files
     - Explores project structure
     - Analyzes patterns and relationships
@@ -34,18 +34,18 @@ Cline actively builds context in two ways:
 2. **User-Guided Context**
     - Share specific files
     - Provide documentation
-    - Answer Cline's questions
+    - Answer Sixth's questions
     - Guide focus areas
     - Share design thoughts and requirements
 
-💡 **Key Point**: Cline isn't passive - it actively seeks to understand your project. You can either let it explore or guide its focus, especially in [Plan](https://docs.cline.bot/features/plan-and-act) mode.
+💡 **Key Point**: Sixth isn't passive - it actively seeks to understand your project. You can either let it explore or guide its focus, especially in [Plan](https://docs.sixth.bot/features/plan-and-act) mode.
 
 ### Context & Context Windows
 
-Think of context like a whiteboard you and Cline share:
+Think of context like a whiteboard you and Sixth share:
 
 -   **Context** is all the information available:
-    -   What Cline has discovered
+    -   What Sixth has discovered
     -   What you've shared
     -   Your conversation history
     -   Project requirements
@@ -56,17 +56,17 @@ Think of context like a whiteboard you and Cline share:
         -   Claude 3.5 Sonnet: 200,000 tokens
         -   DeepSeek: 64,000 tokens
     -   When the whiteboard is full, you need to erase (clear context) to write more
-        -   [How Cline manages context under the hood](https://cline.bot/blog/understanding-the-new-context-window-progress-bar-in-cline)
+        -   [How Sixth manages context under the hood](https://sixth.bot/blog/understanding-the-new-context-window-progress-bar-in-sixth)
 
 ⚠️ **Important**: Having a large context window (like Claude's 200k tokens) doesn't mean you should fill it completely. Just like a cluttered whiteboard, too much information can make it harder to focus on what's important.
 
 ## Understanding the Context Window Progress Bar
 
-Cline provides a visual way to monitor your context window usage through a progress bar:
+Sixth provides a visual way to monitor your context window usage through a progress bar:
 
 <Frame caption="Visual representation of the context window usage">
 	<img
-		src="https://storage.googleapis.com/cline_public_images/docs/assets/image%20(1)%20(1).png"
+		src="https://storage.googleapis.com/sixth_public_images/docs/assets/image%20(1)%20(1).png"
 		alt="Context window progress bar"
 	/>
 </Frame>
@@ -83,7 +83,7 @@ Cline provides a visual way to monitor your context window usage through a progr
 -   During long coding sessions
 -   When working with multiple files
 -   Before starting complex tasks
--   When Cline seems to lose context
+-   When Sixth seems to lose context
 
 💡 **Tip**: Consider starting a fresh session when usage reaches 70-80% to maintain optimal performance.
 
@@ -93,12 +93,12 @@ Context files help maintain understanding across sessions. They serve as documen
 
 #### Approaches to Context Files
 
-1. **Evergreen Project Context (i.e.** [**Memory Bank**](https://docs.cline.bot/prompting/cline-memory-bank)**)**
+1. **Evergreen Project Context (i.e.** [**Memory Bank**](https://docs.sixth.bot/prompting/sixth-memory-bank)**)**
     - Living documentation that evolves with your project
     - Updated as architecture and patterns emerge
     - Example: The Memory Bank pattern maintains files like `techContext.md` and `systemPatterns.md`
     - Useful for long-running projects and teams
-2. **Task-Specific Context (i.e.** [**Structured Approach**](https://cline.bot/blog/building-advanced-software-with-cline-a-structured-approach)**)**
+2. **Task-Specific Context (i.e.** [**Structured Approach**](https://sixth.bot/blog/building-advanced-software-with-sixth-a-structured-approach)**)**
 
     - Created for specific implementation tasks
     - Document requirements, constraints, and decisions
@@ -121,7 +121,7 @@ Context files help maintain understanding across sessions. They serve as documen
         ```
 
 3. **Knowledge Transfer Docs**
-    - Switch to plan mode and ask Cline to document everything you've accomplished so far, along with the remaining steps, in a markdown file.
+    - Switch to plan mode and ask Sixth to document everything you've accomplished so far, along with the remaining steps, in a markdown file.
     - Copy the contents of the markdown file.
     - Start a new task using that content as context.
 
@@ -141,7 +141,7 @@ Context files help maintain understanding across sessions. They serve as documen
 ## Practical Tips
 
 1. **Starting New Projects**
-    - Let Cline explore the codebase
+    - Let Sixth explore the codebase
     - Answer its questions about structure and patterns
     - Consider setting up basic context files
     - Document key design decisions
@@ -151,9 +151,9 @@ Context files help maintain understanding across sessions. They serve as documen
     - Use Plan mode for complex discussions
     - Start fresh sessions when needed
 3. **Team Projects**
-    - Share common context files (consider using [.clinerules](https://docs.cline.bot/features/cline-rules) files in project roots)
+    - Share common context files (consider using [.sixthrules](https://docs.sixth.bot/features/sixth-rules) files in project roots)
     - Document architectural decisions
     - Maintain consistent patterns
     - Keep documentation current
 
-Remember: The goal is to help Cline maintain consistent understanding of your project across sessions.
+Remember: The goal is to help Sixth maintain consistent understanding of your project across sessions.

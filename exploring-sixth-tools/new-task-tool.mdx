@@ -6,7 +6,7 @@ title: "New Task Tool"
 
 #### Overview
 
-Cline includes a powerful internal tool, `new_task`, designed to help manage workflow continuity and context preservation, especially during complex or long-running tasks. This tool, combined with Cline's awareness of its own context window usage and the flexibility of `.clinerules`, enables sophisticated strategies for breaking down work and ensuring seamless transitions between task sessions.
+Sixth includes a powerful internal tool, `new_task`, designed to help manage workflow continuity and context preservation, especially during complex or long-running tasks. This tool, combined with Sixth's awareness of its own context window usage and the flexibility of `.sixthrules`, enables sophisticated strategies for breaking down work and ensuring seamless transitions between task sessions.
 
 Understanding the core capabilities and how they interact with custom rules is key to leveraging this feature effectively.
 
@@ -15,54 +15,54 @@ Understanding the core capabilities and how they interact with custom rules is k
 Two fundamental capabilities enable advanced context management:
 
 1. **The `new_task` Tool:**
-    - **Function:** Allows Cline, upon user approval, to end the current task session and immediately start a new one.
-    - **Context Preloading:** Crucially, Cline can **preload** this new task session with specific context provided within the tool's `<context>` block. This context can be anything Cline or a `.clinerules` file defines – summaries, code snippets, next steps, project state, etc.
+    - **Function:** Allows Sixth, upon user approval, to end the current task session and immediately start a new one.
+    - **Context Preloading:** Crucially, Sixth can **preload** this new task session with specific context provided within the tool's `<context>` block. This context can be anything Sixth or a `.sixthrules` file defines – summaries, code snippets, next steps, project state, etc.
 2. **Context Window Awareness:**
-    - **Tracking:** Cline internally tracks the percentage of its available context window currently being used during a task.
-    - **Visibility:** This information is visible in the `environment_details` provided to Cline in its prompt.
+    - **Tracking:** Sixth internally tracks the percentage of its available context window currently being used during a task.
+    - **Visibility:** This information is visible in the `environment_details` provided to Sixth in its prompt.
 
 #### Using the `/newtask` Slash Command
 
-As a quick alternative to Cline suggesting the `newtask` tool or defining complex rules, you can directly initiate the process using a Slash Command.
+As a quick alternative to Sixth suggesting the `newtask` tool or defining complex rules, you can directly initiate the process using a Slash Command.
 
 -   **How:** Simply type `/newtask` in the chat input field.
--   **Action:** Cline will propose creating a new task, typically suggesting context based on the current session (similar to its default behavior when using the tool). You will still get the `ask_followup_question` prompt to confirm and potentially modify the context before the new task is created.
--   **Benefit:** Provides a fast, user-initiated way to leverage the `new_task` functionality for branching explorations or managing long sessions without waiting for Cline to suggest it.
+-   **Action:** Sixth will propose creating a new task, typically suggesting context based on the current session (similar to its default behavior when using the tool). You will still get the `ask_followup_question` prompt to confirm and potentially modify the context before the new task is created.
+-   **Benefit:** Provides a fast, user-initiated way to leverage the `new_task` functionality for branching explorations or managing long sessions without waiting for Sixth to suggest it.
 
 <Note>
 	For more details on using the `/newtask` slash command, see the [New Task Command](/features/slash-commands/new-task)
 	documentation.
 </Note>
 
-#### Default Behavior (Without `.clinerules`)
+#### Default Behavior (Without `.sixthrules`)
 
-By default, without specific `.clinerules` dictating its behavior:
+By default, without specific `.sixthrules` dictating its behavior:
 
--   **Tool Availability:** The `new_task` tool exists, and Cline _can_ choose to use it.
--   **Context Awareness:** Cline _is_ aware of its context usage percentage.
--   **No Automatic Trigger:** Cline **will not** automatically initiate a task handoff _solely_ based on context usage reaching a specific percentage (like 50%). The decision to suggest using `new_task` comes from the AI model's reasoning based on the overall task progress and prompt instructions.
--   **Basic Context Preloading:** If `new_task` is used without specific rules defining the `<context>` block structure, Cline will attempt to preload relevant information based on its current understanding (e.g., a basic summary of progress and next steps), but this may be less comprehensive than a rule-driven approach.
+-   **Tool Availability:** The `new_task` tool exists, and Sixth _can_ choose to use it.
+-   **Context Awareness:** Sixth _is_ aware of its context usage percentage.
+-   **No Automatic Trigger:** Sixth **will not** automatically initiate a task handoff _solely_ based on context usage reaching a specific percentage (like 50%). The decision to suggest using `new_task` comes from the AI model's reasoning based on the overall task progress and prompt instructions.
+-   **Basic Context Preloading:** If `new_task` is used without specific rules defining the `<context>` block structure, Sixth will attempt to preload relevant information based on its current understanding (e.g., a basic summary of progress and next steps), but this may be less comprehensive than a rule-driven approach.
 
-#### The Power of `.clinerules`: Enabling Custom Workflows
+#### The Power of `.sixthrules`: Enabling Custom Workflows
 
-While the core capabilities exist by default, the true power, automation, and customization emerge when you combine `new_task` and context awareness with custom workflows defined in `.clinerules`. This allows you to precisely control _when_ and _how_ Cline manages context and task continuity.
+While the core capabilities exist by default, the true power, automation, and customization emerge when you combine `new_task` and context awareness with custom workflows defined in `.sixthrules`. This allows you to precisely control _when_ and _how_ Sixth manages context and task continuity.
 
-Key benefits of using `.clinerules` with `new_task`:
+Key benefits of using `.sixthrules` with `new_task`:
 
 -   **Automated Context Management:** Define rules to automatically trigger handoffs at specific context percentages (e.g., >50%, >70%) or token counts, ensuring optimal performance and preventing context loss.
 -   **Model-Specific Optimization:** Tailor handoff triggers based on known thresholds for different LLMs (e.g., trigger earlier for models known to degrade past a certain token count).
--   **Intelligent Breakpoints:** Instruct Cline via rules to find logical stopping points (e.g., after completing a function or test) _after_ a context threshold is passed, ensuring cleaner handoffs.
--   **Structured Task Decomposition:** Use Plan Mode to define subtasks, then use `.clinerules` to have Cline automatically create a new task via `new_task` upon completing each subtask, preloading the context for the _next_ subtask.
--   **Custom Context Packaging:** Mandate the exact structure and content of the `<context>` block in `.clinerules` for highly detailed and consistent handoffs (see example below).
+-   **Intelligent Breakpoints:** Instruct Sixth via rules to find logical stopping points (e.g., after completing a function or test) _after_ a context threshold is passed, ensuring cleaner handoffs.
+-   **Structured Task Decomposition:** Use Plan Mode to define subtasks, then use `.sixthrules` to have Sixth automatically create a new task via `new_task` upon completing each subtask, preloading the context for the _next_ subtask.
+-   **Custom Context Packaging:** Mandate the exact structure and content of the `<context>` block in `.sixthrules` for highly detailed and consistent handoffs (see example below).
 -   **Improved Memory Persistence:** Use `new_task` context blocks as a primary, integrated way to persist information across sessions, potentially replacing or supplementing file-based memory systems.
 -   **Workflow Automation:** Define rules for specific scenarios, like always preloading certain setup instructions or project boilerplate when starting tasks of a particular type.
 
 #### Example Rule-Driven Workflow: Task Handoff Process
 
-A common workflow, **driven by specific `.clinerules` like the example below**, involves these steps:
+A common workflow, **driven by specific `.sixthrules` like the example below**, involves these steps:
 
-1. **Trigger Identification (Rule-Based):** Cline monitors for handoff points defined in the rules (e.g., context usage > 50%, task completion).
-2. **User Confirmation:** Cline uses `ask_followup_question` to propose creating a new task, often showing the intended context defined by the rules.
+1. **Trigger Identification (Rule-Based):** Sixth monitors for handoff points defined in the rules (e.g., context usage > 50%, task completion).
+2. **User Confirmation:** Sixth uses `ask_followup_question` to propose creating a new task, often showing the intended context defined by the rules.
 
     ```xml
     <ask_followup_question>
@@ -71,13 +71,13 @@ A common workflow, **driven by specific `.clinerules` like the example below**, 
     </ask_followup_question>
     ```
 
-3. **User Control:** You can approve, deny, or ask Cline to modify the context before the new task is created.
-4. **Context Packaging (`new_task` Tool):** If approved, Cline uses `new_task`, packaging the context according to the structure mandated by the `.clinerules`.
+3. **User Control:** You can approve, deny, or ask Sixth to modify the context before the new task is created.
+4. **Context Packaging (`new_task` Tool):** If approved, Sixth uses `new_task`, packaging the context according to the structure mandated by the `.sixthrules`.
 5. **New Task Creation:** The current task ends, and a new session begins immediately, preloaded with the specified context.
 
 #### The Handoff Context Block (Rule-Defined Structure)
 
-The effectiveness of rule-driven handoffs depends heavily on how `.clinerules` define the `<context>` block. A comprehensive structure often includes:
+The effectiveness of rule-driven handoffs depends heavily on how `.sixthrules` define the `<context>` block. A comprehensive structure often includes:
 
 -   **`## Completed Work`**: Detailed list of accomplishments, files modified/created, key decisions.
 -   **`## Current State`**: Project status, running processes, key file states.
@@ -87,20 +87,20 @@ The effectiveness of rule-driven handoffs depends heavily on how `.clinerules` d
 
 #### Potential Use Cases & Workflows
 
-The flexibility of `new_task` combined with `.clinerules` opens up many possibilities:
+The flexibility of `new_task` combined with `.sixthrules` opens up many possibilities:
 
 -   **Proactive Context Window Management:** Automatically trigger handoffs at specific percentages (e.g., 50%, 70%) or token counts to maintain optimal performance.
--   **Intelligent Breakpoints:** Instruct Cline to find logical stopping points (e.g., after completing a function or test) _after_ a context threshold is passed, ensuring cleaner handoffs.
--   **Structured Task Decomposition:** Use Plan Mode to define subtasks, then use `.clinerules` to have Cline automatically create a new task via `new_task` upon completing each subtask.
+-   **Intelligent Breakpoints:** Instruct Sixth to find logical stopping points (e.g., after completing a function or test) _after_ a context threshold is passed, ensuring cleaner handoffs.
+-   **Structured Task Decomposition:** Use Plan Mode to define subtasks, then use `.sixthrules` to have Sixth automatically create a new task via `new_task` upon completing each subtask.
 -   **Automated Session Summaries:** Configure the `<context>` block to always include a summary of the previous session's key discussion points.
 -   **Preloading Boilerplate/Setup:** Start new tasks related to specific projects preloaded with standard setup instructions or file templates.
 -   **"Memory Bank" Alternative:** Use `new_task` context blocks as the primary way to persist information across sessions, potentially replacing file-based memory systems.
 
-Experimenting with `.clinerules` is encouraged to discover workflows that best suit your needs!
+Experimenting with `.sixthrules` is encouraged to discover workflows that best suit your needs!
 
-#### Example `.clinerules`: Task Handoff Strategy Guide
+#### Example `.sixthrules`: Task Handoff Strategy Guide
 
-Below is an example `.clinerules` file focused specifically on using `new_task` for context window management. **Remember, this is just one specific strategy; the core `new_task` tool can be used differently with other custom rules.**
+Below is an example `.sixthrules` file focused specifically on using `new_task` for context window management. **Remember, this is just one specific strategy; the core `new_task` tool can be used differently with other custom rules.**
 
 ````markdown
 # You MUST use the `new_task` tool: Task Handoff Strategy Guide
@@ -380,7 +380,7 @@ By strictly following these guidelines, you'll ensure smooth transitions between
 ## User Interaction & Workflow Considerations
 
 -   **Linear Flow:** Currently, using `new_task` creates a linear sequence. The old task ends, and the new one begins. The old task history remains accessible for backtracking.
--   **User Approval:** You always have control, approving the handoff and having the chance to modify the context Cline proposes to carry forward.
--   **Flexibility:** The core `new_task` tool is a flexible building block. Experiment with `.clinerules` to create workflows that best suit your needs, whether for strict context management, task decomposition, or other creative uses.
+-   **User Approval:** You always have control, approving the handoff and having the chance to modify the context Sixth proposes to carry forward.
+-   **Flexibility:** The core `new_task` tool is a flexible building block. Experiment with `.sixthrules` to create workflows that best suit your needs, whether for strict context management, task decomposition, or other creative uses.
 ```
 ````

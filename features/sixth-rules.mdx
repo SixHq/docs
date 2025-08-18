@@ -1,16 +1,16 @@
-Cline Rules allow you to provide Cline with system-level guidance. Think of them as a persistent way to include context and preferences for your projects or globally for every conversation.
+Sixth Rules allow you to provide Sixth with system-level guidance. Think of them as a persistent way to include context and preferences for your projects or globally for every conversation.
 
 ## Creating a Rule
 
 You can create a rule by clicking the `+` button in the Rules tab. This will open a new file in your IDE which you can use to write your rule.
 
 <Frame>
-	<img src="https://storage.googleapis.com/cline_public_images/docs/assets/cline-rules.png" alt="Create a Rule" />
+	<img src="https://storage.googleapis.com/sixth_public_images/docs/assets/sixth-rules.png" alt="Create a Rule" />
 </Frame>
 
 Once you save the file:
 
--   Your rule will be stored in the `.clinerules/` directory in your project (if it's a Workspace Rule)
+-   Your rule will be stored in the `.sixthrules/` directory in your project (if it's a Workspace Rule)
 -   Or in the Global Rules directory (if it's a Global Rule):
 
 ### Global Rules Directory Location
@@ -19,15 +19,15 @@ The location of your Global Rules directory depends on your operating system:
 
 | Operating System | Default Location | Notes |
 |------------------|------------------|-------|
-| **Windows** | `Documents\Cline\Rules` | Uses system Documents folder |
-| **macOS** | `~/Documents/Cline/Rules` | Uses user Documents folder |
-| **Linux/WSL** | `~/Documents/Cline/Rules` | May fall back to `~/Cline/Rules` on some systems |
+| **Windows** | `Documents\Sixth\Rules` | Uses system Documents folder |
+| **macOS** | `~/Documents/Sixth/Rules` | Uses user Documents folder |
+| **Linux/WSL** | `~/Documents/Sixth/Rules` | May fall back to `~/Sixth/Rules` on some systems |
 
-> **Note for Linux/WSL users**: If you don't find your global rules in `~/Documents/Cline/Rules`, check `~/Cline/Rules` as the location may vary depending on your system configuration and whether the Documents directory exists.
+> **Note for Linux/WSL users**: If you don't find your global rules in `~/Documents/Sixth/Rules`, check `~/Sixth/Rules` as the location may vary depending on your system configuration and whether the Documents directory exists.
 
-You can also have Cline create a rule for you by using the [`/newrule` slash command](/features/slash-commands/new-rule) in the chat.
+You can also have Sixth create a rule for you by using the [`/newrule` slash command](/features/slash-commands/new-rule) in the chat.
 
-```markdown Example Cline Rule Structure [expandable]
+```markdown Example Sixth Rule Structure [expandable]
 # Project Guidelines
 
 ## Documentation Requirements
@@ -64,34 +64,34 @@ Create ADRs in /docs/adr for:
 
 ### Key Benefits
 
-1. **Version Controlled**: The `.clinerules` file becomes part of your project's source code
+1. **Version Controlled**: The `.sixthrules` file becomes part of your project's source code
 2. **Team Consistency**: Ensures consistent behavior across all team members
 3. **Project-Specific**: Rules and standards tailored to each project's needs
 4. **Institutional Knowledge**: Maintains project standards and practices in code
 
-Place the `.clinerules` file in your project's root directory:
+Place the `.sixthrules` file in your project's root directory:
 
 ```
 your-project/
-├── .clinerules
+├── .sixthrules
 ├── src/
 ├── docs/
 └── ...
 ```
 
-Cline's system prompt, on the other hand, is not user-editable ([here's where you can find it](https://github.com/cline/cline/blob/main/src/core/prompts/system.ts)). For a broader look at prompt engineering best practices, check out [this resource](https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/overview).
+Sixth's system prompt, on the other hand, is not user-editable ([here's where you can find it](https://github.com/sixth/sixth/blob/main/src/core/prompts/system.ts)). For a broader look at prompt engineering best practices, check out [this resource](https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/overview).
 
-### Tips for Writing Effective Cline Rules
+### Tips for Writing Effective Sixth Rules
 
 -   Be Clear and Concise: Use simple language and avoid ambiguity.
 -   Focus on Desired Outcomes: Describe the results you want, not the specific steps.
 -   Test and Iterate: Experiment to find what works best for your workflow.
 
-### .clinerules/ Folder System
+### .sixthrules/ Folder System
 
 ```
 your-project/
-├── .clinerules/              # Folder containing active rules
+├── .sixthrules/              # Folder containing active rules
 │   ├── 01-coding.md          # Core coding standards
 │   ├── 02-documentation.md   # Documentation requirements
 │   └── current-sprint.md     # Rules specific to current work
@@ -99,7 +99,7 @@ your-project/
 └── ...
 ```
 
-Cline automatically processes **all Markdown files** inside the `.clinerules/` directory, combining them into a unified set of rules. The numeric prefixes (optional) help organize files in a logical sequence.
+Sixth automatically processes **all Markdown files** inside the `.sixthrules/` directory, combining them into a unified set of rules. The numeric prefixes (optional) help organize files in a logical sequence.
 
 #### Using a Rules Bank
 
@@ -107,11 +107,11 @@ For projects with multiple contexts or teams, maintain a rules bank directory:
 
 ```
 your-project/
-├── .clinerules/              # Active rules - automatically applied
+├── .sixthrules/              # Active rules - automatically applied
 │   ├── 01-coding.md
 │   └── client-a.md
 │
-├── clinerules-bank/          # Repository of available but inactive rules
+├── sixthrules-bank/          # Repository of available but inactive rules
 │   ├── clients/              # Client-specific rule sets
 │   │   ├── client-a.md
 │   │   └── client-b.md
@@ -137,38 +137,38 @@ Switch between client projects:
 
 ```bash
 # Switch to Client B project
-rm .clinerules/client-a.md
-cp clinerules-bank/clients/client-b.md .clinerules/
+rm .sixthrules/client-a.md
+cp sixthrules-bank/clients/client-b.md .sixthrules/
 ```
 
 Adapt to different tech stacks:
 
 ```bash
 # Frontend React project
-cp clinerules-bank/frameworks/react.md .clinerules/
+cp sixthrules-bank/frameworks/react.md .sixthrules/
 ```
 
 #### Implementation Tips
 
 -   Keep individual rule files focused on specific concerns
 -   Use descriptive filenames that clearly indicate the rule's purpose
--   Consider git-ignoring the active `.clinerules/` folder while tracking the `clinerules-bank/`
+-   Consider git-ignoring the active `.sixthrules/` folder while tracking the `sixthrules-bank/`
 -   Create team scripts to quickly activate common rule combinations
 
-The folder system transforms your Cline rules from a static document into a dynamic knowledge system that adapts to your team's changing contexts and requirements.
+The folder system transforms your Sixth rules from a static document into a dynamic knowledge system that adapts to your team's changing contexts and requirements.
 
 ### Managing Rules with the Toggleable Popover
 
-To make managing both single `.clinerules` files and the folder system even easier, Cline v3.13 introduces a dedicated popover UI directly accessible from the chat interface.
+To make managing both single `.sixthrules` files and the folder system even easier, Sixth v3.13 introduces a dedicated popover UI directly accessible from the chat interface.
 
 Located conveniently under the chat input field, this popover allows you to:
 
--   **Instantly See Active Rules:** View which global rules (from your user settings) and workspace rules (`.clinerules` file or folder contents) are currently active.
--   **Quickly Toggle Rules:** Enable or disable specific rule files within your workspace `.clinerules/` folder with a single click. This is perfect for activating context-specific rules (like `react-rules.md` or `memory-bank.md`) only when needed.
--   **Easily Add/Manage Rules:** Quickly create a workspace `.clinerules` file or folder if one doesn't exist, or add new rule files to an existing folder.
+-   **Instantly See Active Rules:** View which global rules (from your user settings) and workspace rules (`.sixthrules` file or folder contents) are currently active.
+-   **Quickly Toggle Rules:** Enable or disable specific rule files within your workspace `.sixthrules/` folder with a single click. This is perfect for activating context-specific rules (like `react-rules.md` or `memory-bank.md`) only when needed.
+-   **Easily Add/Manage Rules:** Quickly create a workspace `.sixthrules` file or folder if one doesn't exist, or add new rule files to an existing folder.
 
 This UI significantly simplifies switching contexts and managing different sets of instructions without needing to manually edit files or configurations during a conversation.
 
 <Frame>
-	<img src="https://storage.googleapis.com/cline_public_images/docs/assets/image%20(1).png" alt="Cline Logo" />
+	<img src="https://storage.googleapis.com/sixth_public_images/docs/assets/image%20(1).png" alt="Sixth Logo" />
 </Frame>
