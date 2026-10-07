@@ -1,0 +1,42 @@
+---
+title: "Focus Chain (Task Progress)"
+sidebarTitle: "Focus Chain"
+description: "The live checklist that keeps Sixth on track across long tasks."
+---
+
+**Focus Chain** is a todo list that Sixth keeps for each task and updates as it works. It breaks the task into steps, checks them off as they're done, and keeps Sixth focused on what's left, even in long tasks that run through many steps or a context compaction.
+
+## Where you see it
+
+The checklist appears as a **plan strip** at the top of the message box:
+
+- small progress bars, one per step
+- a count such as `3/5`
+- the step Sixth is working on now
+
+Click the strip to expand the full list:
+
+- a filled check for each finished step
+- a filled circle for the step in progress
+- an empty circle for each step still to do
+
+When every step is done, the strip shows "All N steps done".
+
+## Editing the list
+
+Click the **edit** (pencil) button in the expanded list to open the checklist as a markdown file in the editor. Add, remove or reorder steps, or tick items yourself. Sixth watches the file and picks up your changes.
+
+The file is stored with the task's data: `tasks/<task id>/focus_chain_taskid_<task id>.md` inside Sixth's extension storage.
+
+## How Sixth updates it
+
+Sixth updates the list as it works, by attaching the current checklist to its tool calls (`task_progress`). Every few messages it's also reminded to bring the list up to date.
+
+When Sixth finishes a task, it includes the completed list in its final result. A completion that still has open items on the list counts as unfinished, so Sixth keeps working.
+
+## Settings
+
+Under **Settings → Features**:
+
+- **Enable Focus Chain**: on by default.
+- **Focus Chain Reminder Interval**: how many messages pass before Sixth is reminded to update the list. The default is 6.

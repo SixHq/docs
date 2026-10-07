@@ -1,0 +1,44 @@
+---
+title: "Background Shells & Long-Running Commands"
+sidebarTitle: "Background Shells"
+description: "How Sixth runs dev servers and other long-running commands without getting stuck."
+---
+
+Some commands never finish on their own: dev servers, file watchers, `npm run dev`, `vite`, `flask run` and so on. Sixth starts these as **background shells**. It doesn't wait for them; it keeps working and checks on them when it needs to.
+
+## Starting a server
+
+When Sixth runs a command that starts a long-running process, it marks it as a server (`starts_a_server`). Sixth then:
+
+1. Runs the command in a VS Code terminal.
+2. Collects the output for up to 15 seconds so it can see whether the server started.
+3. Continues with the task while the process keeps running.
+
+Each background shell gets a short id such as `sh-3`. Later, Sixth uses that id to check the shell with the `access_launched_terminal_task` tool. That reports whether the process is still running, its pid, its exit code, how long it has been up, and its latest output lines (100 by default). Sixth checks this instead of starting the same server again.
+
+Background shells can also be started by [Background Agents](/features/background-agents) and [sub-agents](/features/sub-agents).
+
+## Watching and stopping shells
+
+Open the **Agents & shells** dock above the message box (or type `/agents`) and switch to the **Shells** tab. Each shell shows:
+
+- a status dot
+- the command
+- who started it: the main task, an agent or a sub-agent
+- its exit status once it has ended
+- a live running time
+- a **Stop** button
+
+Expand a shell to see its last few lines of output, for example "Last 5 of 812 lines", along with its pid and working folder. When you stop a shell, Sixth first sends Ctrl-C so the server can shut down cleanly.
+
+Up to 2,000 lines of output are kept per shell.
+
+## Commands that take a while
+
+Ordinary commands (builds, installs, test runs) are different: Sixth waits for them. If one is still running after **18 seconds**, Sixth doesn't sit idle:
+
+- It continues with the output collected so far.
+- The command keeps running in your terminal.
+- Sixth decides what to do next, for example carry on with other work while a build runs, re-run the command if it was waiting for input it didn't get, or move on once a server is up.
+
+Sixth can also pause deliberately with the `wait_until` tool (1 to 300 seconds) when it needs to give a long process time before checking the result.

@@ -1,0 +1,56 @@
+---
+title: "Workflows: Connect Your Apps"
+sidebarTitle: "Workflows (App Integrations)"
+---
+
+Workflows let Sixth do more than code. Connect your everyday apps (Gmail, Google Calendar, Google Drive, Slack, Notion, GitHub, Linear and many more) and Sixth can use them while it works on your tasks: reading and sending email, creating calendar events, posting to Slack, updating docs, and so on.
+
+App connections are powered by [Composio](https://composio.dev). You bring your own free Composio API key, and you sign in to each app yourself.
+
+<Note>
+	This page is about connecting apps. **Workflow files** (step-by-step instructions you run with `/workflow-name`) are a
+	different feature: see [Workflows (slash commands)](/features/slash-commands/workflows).
+</Note>
+
+## Opening Workflows
+
+Click the **Workflows** button (plug icon) at the top of the Sixth panel. The page is titled _"Do more than just coding with Sixth"_.
+
+## Setting up your API key
+
+The first time you open Workflows, you'll be asked for a Composio API key.
+
+1. Go to [composio.dev](https://composio.dev) and click **Get started**.
+2. After signing in, open the **API Keys** section on your dashboard.
+3. Click **Create**, grant the key both **read and write** permissions, then create it.
+4. Copy the API key and paste it into the **Composio API key** field in Sixth.
+5. Click **Save & connect**.
+
+Sixth checks the key with Composio before saving it. If the key is rejected you'll see an error and can paste it again.
+
+The key is stored securely in your OS keychain (through VS Code's secret storage). It is never synced or shared.
+
+## Connecting an app
+
+After your key is saved, Workflows shows the app catalog. Popular apps (Gmail, Google Drive, Google Calendar, Google Docs, Google Sheets, Slack, Notion, GitHub and others) are listed first, and you can find any other app with **Search apps…**.
+
+1. Find the app and click **Integrate**.
+2. A sign-in page opens in your browser. Sign in to the app and allow access.
+3. Sixth shows **Waiting for sign-in…** until the connection completes, then marks the app **Connected**.
+
+Connected apps are listed at the top of the page under **Connected**.
+
+## Using connected apps
+
+Once an app is connected, just ask for what you want in the chat, for example:
+
+-   "Check my Gmail for the invoice from Acme and summarize it."
+-   "Create a calendar event tomorrow at 3pm called Design review."
+-   "Post the release notes to the #launches channel in Slack."
+
+Sixth knows which apps you've connected and calls their tools as part of the task. Calls to connected apps follow your [auto-approve](/features/auto-approve) setting for MCP servers, so if you haven't auto-approved MCP tools, Sixth asks before using them.
+
+## Disconnecting and resetting
+
+-   **Disconnect one app:** click the trash icon on its chip under **Connected**.
+-   **Reset Workflows:** at the bottom of the page, click **Reset Workflows (clear API key & disconnect all)** and confirm with **Yes, reset Workflows**. This removes your Composio API key and disconnects every app. You can set it up again anytime.

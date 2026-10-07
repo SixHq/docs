@@ -1,0 +1,41 @@
+---
+title: "Interactive Planning"
+sidebarTitle: "Interactive Planning"
+---
+
+Interactive Planning shows Sixth's plan as an interactive flowchart **before** any code is written. You can see every step, choose between alternative approaches, and approve the plan, so Sixth doesn't head off in the wrong direction. It's powered by Overture.
+
+## Turning it on
+
+Open Sixth **Settings → Integrations** and turn on **Enable Interactive Planning**. When it's ready, the status reads **Planning Active**.
+
+## Using it
+
+Start your message with `/interactive-planning`, followed by what you want to build:
+
+```
+/interactive-planning Add Stripe checkout to the pricing page
+```
+
+Sixth opens the **Interactive Planning** panel in the editor and builds a visual plan there:
+
+-   Each step of the work is a node in the flowchart, with a title and description.
+-   Where there's more than one sensible way to do something, the plan branches into options, each with pros, cons and complexity. You pick which one Sixth should take.
+-   Steps that need input from you (such as API keys or preferences) are part of the plan, so you can provide them up front.
+
+Review the plan and approve it. Sixth then works through it **one step at a time**, and each node's status updates live in the panel as it's executed, completed or fails.
+
+## During and after execution
+
+-   **Pause:** you can pause execution from the panel. Sixth checks before starting each step.
+-   **Resume:** a paused or failed plan can be picked up where it left off.
+-   **Re-run:** after the plan finishes, you can ask to re-run steps from the panel.
+-   **Change the plan:** ask Sixth in the chat to change the plan, and it updates the existing flowchart instead of starting over.
+
+## When to use it
+
+Interactive Planning works best for multi-step work: new features that touch several files, architecture decisions you want a say in, or anything where agreeing on the approach first saves rework. For quick questions, small single-file edits and obvious bug fixes, a normal message is faster.
+
+<Tip>
+	Want a written plan instead of a flowchart? Use [Plan mode](/features/plan-and-act) or the `/deep-planning` slash command.
+</Tip>

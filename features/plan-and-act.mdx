@@ -1,159 +1,56 @@
 ---
-title: "Plan & Act"
-sidebarTitle: "Plan & Act"
+title: "Plan, Act & Explore"
+sidebarTitle: "Plan, Act & Explore"
+description: "Sixth's three modes: plan the work, build it, or investigate and document a codebase."
 ---
 
-Plan & Act modes represent Sixth's approach to structured AI development, emphasizing thoughtful planning before implementation. This dual-mode system helps developers create more maintainable, accurate code while reducing iteration time.
+Sixth has three modes. Pick one with the mode button in the bottom-left of the message box, or press `⌘/Ctrl + Shift + A` to cycle **Act → Plan → Explore**.
 
-<Frame>
-	<iframe
-		style={{ width: "100%", aspectRatio: "16/9" }}
-		src="https://www.youtube.com/embed/b7o6URFPp64"
-		title="YouTube video player"
-		frameBorder="0"
-		allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-		allowFullScreen></iframe>
-</Frame>
+| Mode | What it's for | Changes your files? |
+| --- | --- | --- |
+| **Act** | Build and execute immediately | Yes |
+| **Plan** | Gather information and architect a plan with you | No |
+| **Explore** | Deep codebase investigation and documentation | Only its own report file |
 
-#### Plan Mode: Think First
+You can switch modes in the middle of a task. Sixth keeps the full conversation, so a plan you made in Plan mode carries straight into Act mode.
 
-Plan mode is where you and Sixth figure out what you're trying to build and how you'll build it. In this mode, Sixth:
+## Act mode
 
--   Can read your entire codebase to understand the context
--   Won't make any changes to your files
--   Focuses on understanding requirements and creating a strategy
--   Helps identify potential issues before you write a single line of code
+Act is the default. Sixth has its full toolset: it reads and edits files, runs commands, uses the browser, calls MCP tools and integrations, spawns [sub-agents](/features/sub-agents) and generates images, asking for approval wherever you haven't [auto-approved](/features/auto-approve).
 
-#### Act Mode: Build It
+Use Act for routine changes, for implementing a plan you've already agreed, and for running tests and fixing what they find.
 
-Once you've got a plan, you switch to Act mode. Now Sixth:
+## Plan mode
 
--   Has all the building capabilities at its disposal
--   Can make changes to your codebase
--   Still remembers everything from your planning session
--   Executes the strategy you worked out together
+In Plan mode Sixth reads your codebase, asks questions and works out an approach with you, but doesn't change anything. Its replies can include options you can pick from with a click or a number key.
 
-<Frame>
-	<img src="https://storage.googleapis.com/sixth_public_images/docs/assets/image%20(5).png" alt="Act mode capabilities" />
-</Frame>
+Use Plan mode when:
 
-### Workflow Guide
+- the approach isn't obvious yet,
+- you're debugging something and aren't sure of the cause,
+- a change affects several parts of the codebase.
 
-When I'm working on a new feature or fixing a complex bug, here's what works for me:
+When the plan looks right, switch to Act and tell Sixth to go ahead.
 
-1. I start in Plan mode and tell Sixth what I want to build
-2. Sixth helps me explore the codebase, looking at relevant files
-3. Together we figure out the best approach, considering edge cases and potential issues
-4. When I'm confident in our plan, I switch to Act mode
-5. Sixth implements the solution based on our planning
+<Tip>Turn on **Enable strict plan mode** in **Settings → Features** to hard-block file edits while in Plan mode.</Tip>
 
-#### 1. Start with Plan Mode
+For larger plans you can also:
 
-Begin every significant development task in Plan mode:
+- Use [`/deep-planning`](/features/slash-commands/deep-planning) to have Sixth investigate thoroughly before writing an implementation plan.
+- Use [`/interactive-planning`](/features/interactive-planning) to see the plan as an interactive flowchart you can edit and approve.
 
-In this mode:
+## Explore mode
 
-<Frame>
-	<img src="https://storage.googleapis.com/sixth_public_images/docs/assets/image%20(5)%20(1).png" alt="Plan mode workflow" />
-</Frame>
+Explore mode turns Sixth into a codebase analyst. It reads the project, works out how it's structured and how the pieces fit together, and writes up what a developer needs to know to work in it.
 
--   Share your requirements
--   Let Sixth analyze relevant files
--   Engage in dialogue to clarify objectives
--   Develop implementation strategy
+- Every Explore session saves its report to a file in your project root: `project_info__1.md`, then `project_info__2.md`, and so on. It also shows the report in the chat.
+- Explore can't run commands that change anything or edit your code. If you ask it to build something, it'll point you to Act mode.
 
-<Frame>
-	<img
-		src="https://storage.googleapis.com/sixth_public_images/docs/assets/image%20(2)%20(1)%20(1)%20(1).png"
-		alt="Planning phase"
-	/>
-</Frame>
+Explore is ideal when you're new to a codebase, picking up an unfamiliar repo, or onboarding a teammate.
 
-#### 2. Switch to Act Mode
+## A typical flow
 
-Once you have a clear plan, switch to Act mode:
-
-<Frame>
-	<img src="https://storage.googleapis.com/sixth_public_images/docs/assets/switching-to-act.gif" alt="Switching to Act mode" />
-</Frame>
-
-Act mode allows Sixth to:
-
--   Execute against the agreed plan
--   Make changes to your codebase
--   Maintain context from planning phase
-
-#### 3. Iterate as Needed
-
-Complex projects often require multiple plan-act cycles:
-
--   Return to Plan mode when encountering unexpected complexity
--   Use Act mode for implementing solutions
--   Maintain development momentum while ensuring quality
-
-### Best Practices
-
-#### Planning Phase
-
-1. Be comprehensive with requirements
-2. Share relevant context upfront
-3. Point Sixth to relevant files if he hasn't read them
-4. Validate approach before implementation
-
-#### Implementation Phase
-
-1. Follow the established plan
-2. Monitor progress against objectives
-3. Track changes and their impact
-4. Document significant decisions
-
-<Frame>
-	<img
-		src="https://storage.googleapis.com/sixth_public_images/docs/assets/image%20(3)%20(1).png"
-		alt="Implementation best practices"
-	/>
-</Frame>
-
-### Power User Tips
-
-#### Enhancing Planning
-
--   Use Plan mode to explore edge cases before implementation
--   Switch back to Plan when encountering unexpected complexity
--   Leverage [file reading](/features/at-mentions/file-mentions) to validate assumptions early
--   Have Sixth write markdown files of the plan for future reference
-
-### Common Patterns
-
-#### When to Use Each Mode
-
-I've found Plan mode works best when:
-
--   Starting something new where the approach isn't obvious
--   Debugging a tricky issue where I'm not sure what's wrong
--   Making architectural decisions that will affect multiple parts of the codebase
--   Trying to understand a complex workflow or feature
-
-And Act mode is perfect for:
-
--   Implementing a solution we've already planned out
--   Making routine changes where the approach is clear
--   Following established patterns in the codebase
--   Running tests and making minor adjustments
-
-<Frame>
-	<img src="https://storage.googleapis.com/sixth_public_images/docs/assets/image%20(6).png" alt="Mode usage patterns" />
-</Frame>
-
-### Contributing
-
-Share your experiences and improvements:
-
--   Join our [Discord community](https://discord.gg/sixth)
--   Participate in discussions
--   Submit feature requests
--   Report issues
-
----
-
-Remember: The time invested in planning pays dividends in implementation quality and maintenance efficiency.
+1. **Explore** an unfamiliar repo to get the lay of the land.
+2. **Plan** the feature: share requirements, let Sixth read the relevant files, settle the approach.
+3. **Act** to implement it, with [checkpoints](/features/checkpoints) after every change.
+4. Drop back into **Plan** whenever you hit something unexpected.

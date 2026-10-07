@@ -1,126 +1,57 @@
 ---
 title: "Model Selection Guide"
-description: "Last updated: Feb 5, 2025."
+description: "Which models Sixth supports, how to switch, and when to bring your own key."
 ---
 
-## Understanding Context Windows
+Sixth works with the leading frontier models. On a Sixth plan they all run through your Sixth account, so you can switch freely without setting up API keys.
 
-Think of a context window as your AI assistant's working memory - similar to RAM in a computer. It determines how much information the model can "remember" and process at once during your conversation. This includes:
+## Switching models
 
--   Your code files and conversations
--   The assistant's responses
--   Any documentation or additional context provided
+Click the model name in the bottom row of the message box (next to the **Act** mode button). A picker opens above the message box:
 
-Context windows are measured in tokens (roughly 3/4 of a word in English). Different models have different context window sizes:
+- **Search** by name, or browse models grouped by provider.
+- Models marked **New** were added recently; **Popular** marks what most people use. The check mark shows your current model.
+- Use `↑` `↓` to move, `Enter` to pick, `Esc` to close.
+- The **Image** tab lists the image models Sixth can use for [image generation](/features/image-generation).
 
--   Claude 3.5 Sonnet: 200K tokens
--   DeepSeek Models: 128K tokens
--   Gemini Flash 2.0: 1M tokens
--   Gemini 1.5 Pro: 2M tokens
+Your choice applies to new requests straight away, including in the middle of a task.
 
-When you reach the limit of your context window, older information needs to be removed to make room for new information - just like clearing RAM to run new programs. This is why sometimes AI assistants might seem to "forget" earlier parts of your conversation.
+## Models available
 
-Sixth helps you manage this limitation with its Context Window Progress Bar, which shows:
+| Provider | Models |
+| --- | --- |
+| Anthropic | Claude Opus 5.5, Fable 5.1, Fable 5, Claude Opus 4.8 / 4.7 / 4.6, Claude Sonnet 4.6, Claude Haiku 4.5 |
+| OpenAI | GPT-6 Astra, GPT-6 Sol, GPT-6 Luna, GPT-5.6 Sol / Terra / Luna, GPT-5.5 |
+| Google | Gemini 3.8 Flash, Gemini 3.1 Pro, Gemini 3.7 Flash, Gemini 3.5 Flash |
+| xAI | Grok 4.7, Grok 4.6, Grok 4.5, Grok Build |
+| Moonshot AI | Kimi K3 |
+| DeepSeek | DeepSeek V4.1 Flash, DeepSeek V4 Pro |
+| Meta | Muse Spark 1.3, Muse Spark 1.2 |
+| Alibaba | Qwen 3.7 Plus, Qwen 3.6 27B, Qwen 3.6 Flash |
+| Mistral AI | Mistral Medium, Mistral Small |
 
--   Input tokens (what you've sent to the model)
--   Output tokens (what the model has generated)
--   A visual representation of how much of your context window you've used
--   The total capacity for your chosen model
+More options (OpenRouter, Hugging Face, Cerebras, SambaNova and local models via Ollama or LM Studio) appear further down the list. The picker always shows the current set, so it's the source of truth if this table falls behind.
 
-<Frame caption="Visual representation of the context window usage in Sixth">
-	<img
-		src="https://storage.googleapis.com/cline_public_images/docs/assets/image%20(11).png"
-		alt="Context window progress bar example"
-	/>
-</Frame>
+## Extended thinking
 
-This visibility helps you work more effectively with Sixth by letting you know when you might need to start fresh or break tasks into smaller chunks.
+Models that support extended thinking (shown with a lightbulb) let you turn reasoning on when you pick them. Choosing one opens a small panel with a **thinking** switch; turn it on and click **Use** to select the model with thinking enabled. Some models, such as Fable 5.1, always think.
 
-### Model Comparison
+While a model is thinking you'll see a live **Thinking** row in the chat; afterwards it collapses to **Thought for Ns**, and you can click it to read the reasoning.
 
-## LLM Model Comparison for Sixth (Feb 2025)
+## Choosing a model
 
-| Model             | Input Cost\* | Output Cost\* | Context Window | Best For                            |
-| ----------------- | ------------ | ------------- | -------------- | ----------------------------------- |
-| Claude 3.5 Sonnet | $3.00        | $15.00        | 200K           | Best code implementation & tool use |
-| DeepSeek R1       | $0.55        | $2.19         | 128K           | Planning & reasoning champion       |
-| DeepSeek V3       | $0.14        | $0.28         | 128K           | Value code implementation           |
-| o3-mini           | $1.10        | $4.40         | 200K           | Flexible use, strong planning       |
-| Gemini Flash 2.0  | $0.00        | $0.00         | 1M             | Strong all-rounder                  |
-| Gemini 1.5 Pro    | $0.00        | $0.00         | 2M             | Large context processing            |
+- **Hard, multi-step coding work:** a top-tier model such as Claude Opus 5.5, Fable 5.1, GPT-6 Astra or Gemini 3.1 Pro.
+- **Fast everyday edits:** a quicker model such as Gemini 3.8 Flash, DeepSeek V4.1 Flash, Claude Haiku 4.5 or Kimi K3.
+- **Planning:** pair [Plan mode](/features/plan-and-act) with a strong reasoning model and turn thinking on.
 
-\*Costs per million tokens
+You can switch at any point, so it's easy to plan with one model and implement with another.
 
-### Top Picks for 2025
+## Context window
 
-1. **Claude 3.5 Sonnet**
-    - Best overall code implementation
-    - Most reliable tool usage
-    - Expensive but worth it for critical code
-2. **DeepSeek R1**
-    - Exceptional planning & reasoning
-    - Great value pricing
-3. **o3-mini**
-    - Strong for planning with adjustable reasoning
-    - Three reasoning modes for different needs
-    - Requires OpenAI Tier 3 API access
-    - 200K context window
-4. **DeepSeek V3**
-    - Reliable code implementation
-    - Great for daily coding
-    - Cost-effective for implementation
-5. **Gemini Flash 2.0**
-    - Massive 1M context window
-    - Improved speed and performance
-    - Good all-around capabilities
+Each model has a context window: how much of the conversation, files and tool output it can hold at once. The ring next to the task title shows how much of it the current task is using. When a long task gets close to the limit, Sixth compacts the conversation automatically so you can keep going. See [Understanding context management](/getting-started/understanding-context-management).
 
-### Best Models by Mode (Plan or Act)
+## Bring your own key
 
-#### Planning
+If you'd rather use your own provider account, pick a model whose provider isn't set up yet. It shows an **Add key** badge, and selecting it opens an inline form for your API key (with a link to get one, plus a base URL field where relevant). Click **Save & use** and the model runs on your key from then on.
 
-1. **DeepSeek R1**
-    - Best reasoning capabilities in class
-    - Excellent at breaking down complex tasks
-    - Strong math/algorithm planning
-    - MoE architecture helps with reasoning
-2. **o3-mini (high reasoning)**
-    - Three reasoning levels:
-        - High: Complex planning
-        - Medium: Daily tasks
-        - Low: Quick ideas
-    - 200K context helps with large projects
-3. **Gemini Flash 2.0**
-    - Massive context window for complex planning
-    - Strong reasoning capabilities
-    - Good with multi-step tasks
-
-#### Acting (coding)
-
-1. **Claude 3.5 Sonnet**
-    - Best code quality
-    - Most reliable with Sixth tools
-    - Worth the premium for critical code
-2. **DeepSeek V3**
-    - Nearly Sonnet-level code quality
-    - Better API stability than R1
-    - Great for daily coding
-    - Strong tool usage
-3. **Gemini 1.5 Pro**
-    - 2M context window
-    - Good with complex codebases
-    - Reliable API
-    - Strong multi-file understanding
-
-### A Note on Local Models
-
-While running models locally might seem appealing for cost savings, we currently don't recommend any local models for use with Sixth. [Local models are significantly less reliable](https://docs.sixth.bot/running-models-locally/read-me-first) at using Sixth's essential tools and typically retain only 1-26% of the original model's capabilities. The full cloud version of DeepSeek-R1, for example, is 671B parameters - local versions are drastically simplified copies that struggle with complex tasks and tool usage. Even with high-end hardware (RTX 3070+, 32GB+ RAM), you'll experience slower responses, less reliable tool execution, and reduced capabilities. For the best development experience, we recommend sticking with the cloud models listed above.
-
-### Key Takeaways
-
-1. **Plan vs Act Matters**: Choose models based on task type
-2. **Real Performance > Benchmarks**: Focus on actual Sixth performance
-3. **Mix & Match**: Use different models for planning and implementation
-4. **Cost vs Quality**: Premium models worth it for critical code
-5. **Keep Backups**: Have alternatives ready for API issues
-
-_\*Note: Based on real usage patterns and community feedback rather than just benchmarks. Your experience may vary. This is not an exhaustive list of all the models available for use within Sixth._
+You can manage provider keys later in **Settings**. Setup guides for each provider are under [Provider Configuration](/provider-config/anthropic), and local models are covered in [Running models locally](/running-models-locally/read-me-first).

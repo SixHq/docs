@@ -2,7 +2,7 @@
 	"$schema": "https://mintlify.com/docs.json",
 	"theme": "linden",
 	"name": "Sixth",
-	"description": "AI-powered coding assistant for VSCode",
+	"description": "Sixth: the AI coding agent for VS Code, with Design Studio, background agents, skills and integrations",
 	"colors": {
 		"primary": "#9D4EDD",
 		"light": "#F0E6FF",
@@ -57,18 +57,40 @@
 			{
 				"group": "Getting Started",
 				"pages": [
+					"getting-started/what-is-sixth",
 					"getting-started/for-new-coders",
 					"getting-started/installing-sixth",
 					"getting-started/installing-dev-essentials",
 					"getting-started/model-selection-guide",
+					"getting-started/plans-and-pricing",
 					"getting-started/task-management",
-					"getting-started/understanding-context-management",
-					"getting-started/what-is-sixth"
+					"getting-started/understanding-context-management"
 				]
 			},
 			{
 				"group": "Improving Your Prompting Skills",
-				"pages": ["prompting/prompt-engineering-guide", "prompting/sixth-memory-bank"]
+				"pages": [
+					"prompting/prompt-engineering-guide",
+					"prompting/sixth-memory-bank"
+				]
+			},
+			{
+				"group": "Sixth Features",
+				"pages": [
+					"features/chat-interface",
+					"features/design-studio",
+					"features/background-agents",
+					"features/sub-agents",
+					"features/background-shells",
+					"features/skills",
+					"features/workflow-integrations",
+					"features/telegram",
+					"features/background-daemon",
+					"features/interactive-planning",
+					"features/image-generation",
+					"features/focus-chain",
+					"features/context-and-compaction"
+				]
 			},
 			{
 				"group": "Features",
@@ -78,13 +100,13 @@
 					"features/sixth-rules",
 					"features/drag-and-drop",
 					"features/plan-and-act",
-					"features/slash-commands/workflows",
 					"features/editing-messages",
 					{
 						"group": "@ Mentions",
 						"pages": [
 							"features/at-mentions/overview",
 							"features/at-mentions/file-mentions",
+							"features/at-mentions/folder-mentions",
 							"features/at-mentions/terminal-mentions",
 							"features/at-mentions/problem-mentions",
 							"features/at-mentions/git-mentions",
@@ -94,10 +116,15 @@
 					{
 						"group": "Slash Commands",
 						"pages": [
+							"features/slash-commands/slash-commands",
+							"features/slash-commands/workflows",
 							"features/slash-commands/new-task",
 							"features/slash-commands/new-rule",
 							"features/slash-commands/smol",
-							"features/slash-commands/report-bug"
+							"features/slash-commands/report-bug",
+							"features/slash-commands/btw",
+							"features/slash-commands/deep-planning",
+							"features/slash-commands/agents"
 						]
 					},
 					{
@@ -115,9 +142,9 @@
 			{
 				"group": "Exploring Sixth's Tools",
 				"pages": [
-					"exploring-sixths-tools/sixth-tools-guide",
-					"exploring-sixths-tools/new-task-tool",
-					"exploring-sixths-tools/remote-browser-support"
+					"exploring-sixth-tools/sixth-tools-guide",
+					"exploring-sixth-tools/new-task-tool",
+					"exploring-sixth-tools/remote-browser-support"
 				]
 			},
 			{
@@ -150,7 +177,7 @@
 					"provider-config/aws-bedrock-with-credentials-authentication",
 					"provider-config/aws-bedrock-with-profile-authentication",
 					"provider-config/gcp-vertex-ai",
-					"provider-config/litellm-and-sixth-using-codestral",
+					"provider-config/litellm-and-cline-using-codestral",
 					"provider-config/vscode-language-model-api",
 					"provider-config/xai-grok",
 					"provider-config/mistral-ai",
@@ -173,11 +200,16 @@
 			},
 			{
 				"group": "Troubleshooting",
-				"pages": ["troubleshooting/terminal-quick-fixes", "troubleshooting/terminal-integration-guide"]
+				"pages": [
+					"troubleshooting/terminal-quick-fixes",
+					"troubleshooting/terminal-integration-guide"
+				]
 			},
 			{
 				"group": "More Info",
-				"pages": ["more-info/telemetry"]
+				"pages": [
+					"more-info/telemetry"
+				]
 			}
 		]
 	},
@@ -192,6 +224,8 @@
 		"prompt": "Search Sixth documentation..."
 	},
 	"contextual": {
-		"options": ["copy"]
+		"options": [
+			"copy"
+		]
 	}
 }

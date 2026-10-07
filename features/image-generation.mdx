@@ -1,0 +1,41 @@
+---
+title: "Image Generation & Image Previews"
+sidebarTitle: "Image Generation"
+---
+
+Sixth can generate custom images for your project, look at images on the web, and preview SVG and ICO files right in the chat.
+
+## Generating images
+
+Use `/generate-image` followed by a description of what you want:
+
+```
+/generate-image a minimal flat logo of a paper plane in coral and navy
+```
+
+Sixth writes a detailed prompt from your description, generates a 1024×1024 PNG and saves it in your project. The image appears in the chat as soon as it's ready, with an **Open** link to the saved file.
+
+Sixth also generates images on its own while working when your project needs a visual that can't be found on the web, such as a custom app logo, an abstract background or a unique design asset. For images that already exist online, it fetches them instead (see below).
+
+<Note>Image generation requires you to be signed in to your Sixth account.</Note>
+
+### Limits
+
+Image generation has a limit based on your plan:
+
+| Plan       | Images            |
+| ---------- | ----------------- |
+| Free trial | 1 in total        |
+| Pro        | 5 per day         |
+| Pro+       | 10 per day        |
+| Ultra      | 25 per day        |
+
+Daily limits reset every day (UTC). When you reach your limit, Sixth tells you and stops generating images until it resets.
+
+## Viewing images from the web
+
+When an image is referenced by URL (in your code, a design asset, an API response…), Sixth can fetch it and look at it. The image is shown in the chat.
+
+## SVG and ICO previews
+
+When Sixth creates or edits an `.svg` or `.ico` file, the chat shows a live preview of the result instead of the raw markup, so you can check icons and illustrations at a glance. Click the row to collapse the preview.

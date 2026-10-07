@@ -1,0 +1,90 @@
+---
+title: "Background Agents"
+sidebarTitle: "Background Agents"
+description: "Create your own specialist agents and run them in the background while you keep chatting."
+---
+
+Background Agents (also called Dedicated Agents) are specialist workers you define once and reuse. Each one has its own instructions, permissions and, optionally, its own model. You hand an agent a task and it works in the background while you keep chatting with Sixth in the main task. You can run as many agents as you like at the same time.
+
+## Giving an agent a task
+
+Start a message with `@agent:` followed by the agent's name:
+
+```
+@agent:code-reviewer review the changes I made to src/routes/auth.ts
+```
+
+- The message goes to the agent, not to your current task, so the main conversation isn't interrupted.
+- Tag several agents in one message (`@agent:reviewer @agent:tester …`) to give each of them the same task.
+- The Agents dock opens so you can watch the run start.
+
+Sixth can also delegate on its own. When one of your agents matches part of the work and that part can run independently, Sixth launches it with the `launch_agent` tool and carries on with its own work. When the agent finishes, its result is reported back to Sixth in a later turn and shown in the chat as an agent result card with a **Transcript** link.
+
+<Tip>Agents have no access to your current conversation. When you tag an agent, write the task so it stands on its own: exact file paths, requirements and what you expect back.</Tip>
+
+## The Agents & shells dock
+
+The **Agents & shells** button sits just above the message box. It shows how many agents and background shells are running, and opens the dock. You can also open it by typing `/agents`.
+
+The **Agents** tab lists runs grouped into **Working** and **Finished**. For each run you can:
+
+- See its live activity, elapsed time and reasoning-token count.
+- Expand it to read the full transcript, including each tool call and its output.
+- **Stop** a run that is working, or **Resume** a stopped run so the agent continues where it left off.
+- Open the agent's definition file.
+
+The **Shells** tab lists long-running commands such as dev servers. See [Background Shells](/features/background-shells).
+
+Past agent runs are also listed under the **Agents** tab of the History page.
+
+## Creating an agent
+
+Click **New agent** in the dock. The wizard has three steps:
+
+1. **Basics**: a name (lowercase letters, numbers and hyphens, for example `code-reviewer`) and a description of what the agent does and when it should be used. Sixth uses the description to decide when to delegate to it.
+2. **Permissions, model and scope**:
+   - **Read**: read project files, search and list code definitions. Always on.
+   - **Write**: create, edit and delete files.
+   - **Commands**: run shell commands in the workspace.
+   - **Browser**: fetch web pages for docs and research.
+   - **MCP**: use connected MCP servers and resources.
+   - **Skills**: load and follow skill instructions.
+   - **Model**: optionally pin a model for this agent. Otherwise it uses your current model.
+   - **Scope**: **Project** (shared with your team) or **Global** (available in all your projects).
+3. **Review**, then finish with **Create with AI (recommended)**, where Sixth writes the agent's instructions for you, or **Create manually**, which opens a template file for you to fill in.
+
+## Agent definition files
+
+Each agent is a single markdown file with YAML frontmatter. The body becomes the agent's instructions.
+
+```markdown
+---
+name: code-reviewer
+description: Reviews code for quality and security. Use after code changes.
+permissions: read, write, command
+model: gpt-5.4-mini
+maxTurns: 25
+---
+You are a careful code reviewer. ...
+```
+
+| Location | Scope |
+| --- | --- |
+| `<project>/.sixth/agents/*.md` | Project: commit it to share the agent with your team |
+| `~/.sixth/agents/*.md` | Global: available in every project on your machine |
+
+If a project agent and a global agent have the same name, the project one wins. `model` and `maxTurns` are optional; without `maxTurns` a run has no turn limit.
+
+<Note>
+Project agents live in the repository, so anyone with commit access can change them. The first time a project agent that can run commands or use MCP servers is launched, Sixth asks you to confirm (**Run agent** or **Review file first**). It asks again only if the agent later gains a new command or MCP permission.
+</Note>
+
+## How Sixth manages agent runs
+
+Sixth has three tools for working with your agents:
+
+- `launch_agent` starts a run and returns immediately. Sixth does not wait for the agent.
+- `get_dedicated_agent_progress` checks a run's status, recent activity and result.
+- `stop_dedicated_agent` cancels a run that is stuck or off track. You can resume stopped runs later from the dock.
+
+There is no limit on how many agents can run at the same time.

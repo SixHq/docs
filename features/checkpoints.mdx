@@ -1,79 +1,51 @@
 ---
 title: "Checkpoints"
 sidebarTitle: "Checkpoints"
+description: "Compare and roll back Sixth's changes at any step of a task."
 ---
 
-Checkpoints automatically save snapshots of your workspace after each step in a task. This feature lets you track changes, roll back when needed, and experiment confidently with your code.
+Checkpoints are automatic snapshots of your workspace taken as Sixth works. They let you see exactly what changed at each step and roll back your files, the conversation, or both.
 
-## How Checkpoints Work
+## How checkpoints work
 
-Sixth creates a checkpoint after each tool use (file edits, commands, etc.). These checkpoints:
+Sixth saves a checkpoint after each change it makes (file edits, commands and so on). Checkpoints are kept in a separate shadow Git repository, so they never touch your own Git history, branches or staging area.
 
--   Work alongside your Git workflow without interference
--   Maintain context between restores
--   Use a shadow Git repository to track changes
+In the chat, each checkpoint is a thin line:
 
-For example, if you're working on a feature and Sixth makes multiple file changes, each change creates a checkpoint. This means you can review each modification and, if needed, roll back to any point without affecting your main Git repository.
+**Checkpoint** ────────── **Compare** · **Restore**
 
-## Viewing Changes & Restoring
+## Comparing
 
-After each tool use, you can:
+Click **Compare** to open a diff of everything that changed since that checkpoint.
 
-1. Click the "Compare" button to see modified files
-2. Click the "Restore" button to open restore options
+## Restoring
 
-<Frame>
-	<img
-		src="https://storage.googleapis.com/sixth_public_images/docs/assets/image%20(13).png"
-		alt="Checkpoint comparison and restore options"
-	/>
-</Frame>
+Click **Restore** and choose:
 
-## Restore Options
+| Option | What it does |
+| --- | --- |
+| **Restore files** | Puts your project's files back to the snapshot taken at this point. The conversation stays as it is. |
+| **Restore task only** | Deletes the messages after this point. Your files aren't touched. |
+| **Restore files & task** | Restores your files *and* deletes the messages after this point, for a clean restart from here. |
 
-To restore to a previous point:
+After **Restore files**, the checkpoint line is marked **(restored)**.
 
-1. Click the "Restore" button next to any step
-2. Choose from three options:
-    - **Restore Task and Workspace**: Reset both codebase and task to that point
-    - **Restore Task Only**: Keep codebase changes but revert task context
-    - **Restore Workspace Only**: Reset codebase while preserving task context
+<Tip>Use **Compare** first to check exactly what a restore will undo.</Tip>
 
-Example: If Sixth makes changes you don't like while styling a component, you can use "Restore Workspace Only" to revert the code changes while keeping the conversation context, allowing you to try a different approach.
+## Editing a message
 
-<Frame caption="Reverting both codebase and task to before any changes were made to start fresh">
-	<img src="https://storage.googleapis.com/sixth_public_images/docs/assets/checkpointsDemo.gif" alt="Checkpoint restore demo" />
-</Frame>
+Clicking one of your earlier messages lets you edit and resend it from that point. Press **Enter** (**Restore chat**) to roll back just the conversation, or **⌘/Ctrl + Enter** (**Restore all**) to also restore your files to that point. See [Editing messages](/features/editing-messages).
 
-## Use Cases
+## When to use them
 
-Checkpoints let you be more experimental with Sixth. While human coding is often methodical and iterative, AI can make substantial changes quickly. Checkpoints help you track these changes and revert if needed.
+- **With auto-approve:** let Sixth move fast, knowing any step can be undone.
+- **Trying alternatives:** restore files and ask for a different approach.
+- **Exploring prompts:** restore the task only to try a different instruction while keeping the file changes.
 
-### Using Auto-Approve Mode
+## Turning checkpoints off
 
--   Provides safety net for rapid iterations
--   Makes it easy to undo unexpected results
+Checkpoints are on by default. Turn off **Enable Checkpoints** under **Settings → Features** if you don't want them; because they use Git under the hood, very large workspaces can be slow to snapshot.
 
-### Testing Different Approaches
+## Deleting checkpoints
 
--   Try multiple solutions confidently
--   Compare different implementations
--   Quickly revert to working states
--   Ideal for exploring different design patterns or architectural approaches
-
-## Best Practices
-
-1. Use checkpoints as safety nets when experimenting
-2. Leverage auto-approve mode more confidently, knowing you can always roll back
-3. Restore selectively based on needs:
-    - Use "Restore Task and Workspace" for a fresh start
-    - Use "Restore Task Only" to try different prompts, but keep file changes
-    - Use "Restore Workspace Only" to attempt different implementations while preserving conversation context
-
-## Relationship with Message Editing
-
-The [message editing feature](/features/editing-messages) uses checkpoints under the hood when you select the "Restore All" option. This allows you to not only edit and resubmit your message but also restore your workspace to the state it was in at that point in the conversation.
-
-## Deleting Checkpoints
-
-You can delete all checkpoints by using the **"Delete All History"** button in the task history menu. Note that this will also delete all tasks. Checkpoints are stored in VS Code's globalStorage.
+Checkpoints are stored with your task history in VS Code's global storage. Deleting a task from [history](/getting-started/task-management) deletes its checkpoints too; **Delete All History** removes all of them.

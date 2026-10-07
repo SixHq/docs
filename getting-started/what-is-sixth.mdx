@@ -1,8 +1,56 @@
 ---
 title: "What is Sixth?"
-description: "An introduction to Sixth, your AI-powered development assistant in VS Code."
+description: "An introduction to Sixth, the AI coding agent for VS Code."
 ---
 
-Sixth is an AI development assistant which integrates with Microsoft Visual Studio Code. It provides an interface between your IDE and LLMs facilitating code development, increasing productivity and lowering the barrier to entry for new coders. Depending on permissions, Sixth can read/write files, execute commands, use your web browser, and expand its capabilities with Model Context Protocol servers.
+Sixth is an AI coding agent that lives in VS Code. You describe what you want in plain language, and Sixth reads your project, plans the work, edits files, runs commands and checks its own results, asking for your approval wherever you want it to.
 
-What makes Sixth distinctive is its thoughtful approach to code generation and its extensive integration capabilities. Rather than simply generating code snippets, Sixth collaborates with developers by planning solutions step-by-step, maintaining awareness of the entire development environment, and requiring explicit approval for all changes. It can understand large codebases, accelerate onboarding for new engineers, and connect with hundreds of tools through its Model Context Protocol Marketplace, enabling everything from streamlined project deployments to automated incident response—all through natural language commands.
+It works with the frontier models out of the box (Claude, GPT, Gemini, Grok, Kimi, DeepSeek and more) through your Sixth account, so there's no API key to set up unless you want to bring your own.
+
+## What Sixth can do
+
+<CardGroup cols={2}>
+	<Card title="Build and fix code" icon="code" href="/features/chat-interface">
+		Reads and edits files, runs commands, browses the web and verifies its work, with a checkpoint after every change.
+	</Card>
+	<Card title="Design Studio" icon="palette" href="/features/design-studio">
+		Pick one of 300+ designer-made themes and Sixth builds your app in that style. No designer needed.
+	</Card>
+	<Card title="Background agents" icon="robot" href="/features/background-agents">
+		Hand a task to a dedicated agent with `@agent:name` and keep chatting while it works.
+	</Card>
+	<Card title="Sub-agents" icon="layer-group" href="/features/sub-agents">
+		Sixth splits big jobs across 1–5 parallel sub-agents, so multi-part work finishes faster.
+	</Card>
+	<Card title="Skills" icon="lightbulb" href="/features/skills">
+		Reusable instruction sets that teach Sixth your workflows. Run one with `/skill-name`.
+	</Card>
+	<Card title="Workflow integrations" icon="plug" href="/features/workflow-integrations">
+		Connect Gmail, Calendar, Drive, Slack and more so Sixth can work across your everyday tools.
+	</Card>
+	<Card title="Telegram" icon="telegram" href="/features/telegram">
+		Keep your coding tasks going from your phone, 24/7.
+	</Card>
+	<Card title="Interactive planning" icon="diagram-project" href="/features/interactive-planning">
+		See a complex task as an interactive flowchart before any code is written.
+	</Card>
+	<Card title="Image generation" icon="image" href="/features/image-generation">
+		Generate images and save them straight into your project.
+	</Card>
+	<Card title="Plan, Act & Explore" icon="route" href="/features/plan-and-act">
+		Plan first, build immediately, or have Sixth document an unfamiliar codebase.
+	</Card>
+</CardGroup>
+
+## How you stay in control
+
+- **Approvals.** Sixth asks before it edits files, runs commands or uses external tools, unless you've [auto-approved](/features/auto-approve) that kind of action.
+- **Checkpoints.** Every change is snapshotted, so you can [compare and restore](/features/checkpoints) your files, the conversation, or both.
+- **Rules.** [Sixth Rules](/features/sixth-rules) give Sixth your project's conventions on every task.
+
+## Next steps
+
+- [Install Sixth](/getting-started/installing-sixth)
+- [Choose a model](/getting-started/model-selection-guide)
+- [Plans & pricing](/getting-started/plans-and-pricing)
+- [Tour the chat interface](/features/chat-interface)

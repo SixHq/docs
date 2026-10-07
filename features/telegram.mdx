@@ -1,0 +1,72 @@
+---
+title: "Telegram"
+sidebarTitle: "Telegram"
+---
+
+Control Sixth from your phone. With the Telegram Relay you can send tasks, approve actions, answer Sixth's questions and follow its progress from Telegram, then pick the work back up in VS Code.
+
+Telegram works through your own Telegram bot, which you create in a minute with @BotFather.
+
+## Setting it up
+
+Open Sixth **Settings → Integrations** and find **Telegram Relay**. Setup has three steps.
+
+**1. Create a Telegram bot**
+
+1. Open [@BotFather](https://t.me/BotFather) on Telegram.
+2. Send `/newbot` and follow the prompts.
+3. Give it any name (e.g. "My Sixth AI").
+4. Copy the **bot token** it gives you.
+
+Click **I have my bot token**.
+
+**2. Paste your bot token**
+
+Paste the token into the field and continue. The token is saved securely in VS Code's secret storage.
+
+**3. Open your bot on Telegram**
+
+Sixth shows a QR code and a link. Scan the QR code with your phone camera, or open the link on your phone, to connect instantly.
+
+If no link is shown, send `/pair <code>` to your bot with the pairing code Sixth displays. Pairing codes expire after **5 minutes**. Click **New Code** to get a fresh one.
+
+When pairing completes, Settings shows **Telegram Relay Active** with your bot's username.
+
+## Using Sixth from Telegram
+
+Just message your bot to start a task. Sixth replies in the chat as it works:
+
+-   **Approvals** (running a command, editing a file…) appear as buttons you can tap.
+-   **Questions** from Sixth can be answered by replying directly.
+-   **Photos** you send are passed to Sixth with your message.
+
+### Bot commands
+
+| Command         | What it does                                                     |
+| --------------- | ---------------------------------------------------------------- |
+| `/new_chat`     | Clear the current task and start a fresh conversation            |
+| `/interrupt`    | Abort the currently running task                                 |
+| `/history`      | Show your last 10 tasks with their IDs                           |
+| `/resume <id>`  | Resume a previous task (interrupts the current one)              |
+| `/approve`      | Approve a pending tool call or command                           |
+| `/reject`       | Reject a pending tool call or command                            |
+| `/proceed`      | Continue after command output                                    |
+| `/btw <question>` | Ask about what the agent is doing, without interrupting it     |
+| `/status`       | Check whether a task is running or idle                          |
+| `/help`         | Show the command list                                            |
+| `/disconnect`   | Unlink Telegram from VS Code                                     |
+
+## Keeping Telegram available when VS Code is closed
+
+By default the bot runs inside VS Code, so it only responds while VS Code is open. To keep it connected 24/7, turn on the [Background Daemon](/features/background-daemon) in **Settings → Integrations**.
+
+## Re-pairing and disconnecting
+
+Once connected, the Telegram Relay section has two buttons:
+
+-   **Re-pair Device** — link a different phone or chat.
+-   **Disconnect** — unlink Telegram from Sixth.
+
+You can also send `/disconnect` to your bot.
+
+<Note>WhatsApp, Discord, Slack and iMessage relays are coming soon.</Note>

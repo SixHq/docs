@@ -1,0 +1,23 @@
+---
+title: "Background Daemon"
+sidebarTitle: "Background Daemon"
+---
+
+The Background Daemon runs Sixth as a background process on your machine, so your [Telegram](/features/telegram) bot stays connected and can receive and work on coding tasks even when VS Code is closed.
+
+## Turning it on
+
+1. Set up the [Telegram Relay](/features/telegram) first.
+2. Open Sixth **Settings → Integrations** and find **Background Daemon**.
+3. Turn on **Run background daemon**.
+
+When it's running, the status reads **Daemon Active** with its process ID ("PID … — listening for messages"). Turn the toggle off to stop it.
+
+## Requirements
+
+The daemon runs on your system's Node.js (not the copy bundled inside VS Code), so Node.js must be installed and available on your `PATH`.
+
+## Good to know
+
+-   The daemon runs on your machine. Your computer has to be on and awake for it to pick up messages.
+-   Its process files live in the `.sixth` folder in your home directory.

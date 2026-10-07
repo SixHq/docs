@@ -1,0 +1,35 @@
+---
+title: "Context Window & Automatic Compaction"
+sidebarTitle: "Context & Compaction"
+description: "How Sixth keeps long tasks going when the conversation gets large."
+---
+
+Every model can only read a limited amount of conversation at once (its **context window**). Long tasks fill it up. Sixth watches how full it is and compacts the conversation automatically, so a long task keeps going instead of failing or asking you to start over.
+
+## Seeing how full the context is
+
+The task header shows a small **context ring** next to the task title, with a percentage. The ring turns amber from 85% onwards.
+
+Click the ring (or the task title) to open the task details. Under **Context** there's a bar showing tokens used against the model's context window, for example `76.4k / 200k`, along with the task's input, output and cache token totals.
+
+## Automatic compaction
+
+When the previous response used **more than 92%** of the context window, Sixth compacts before sending the next request:
+
+1. The chat shows **Compacting history** with the current usage.
+2. Sixth summarises the older part of the conversation, keeping what matters: decisions, files touched, problems solved, what's left to do.
+3. The summary replaces those older turns in what the model sees, and the task continues.
+
+If a summary can't be made (for example when you use your own API key), Sixth drops the oldest turns instead, so the task can always continue.
+
+If a provider rejects a request because the input is too large, Sixth compacts and retries the request on its own. While that runs, the chat shows **Compacting conversation context** with progress, then **Context compacted — resuming**.
+
+<Note>Compaction only changes what the model reads. Your chat history stays as it was, so you can still scroll back through the full conversation.</Note>
+
+## Compacting manually with /smol
+
+Type `/smol` (alias `/compact`) to compact on demand. It's useful when you've finished one phase of work and want to free up room before the next. Sixth writes a detailed summary of the conversation so far, and once it's accepted, that summary replaces the older history. See [/smol](/features/slash-commands/smol).
+
+## Starting fresh with /newtask
+
+When the work has naturally moved on to something new, `/newtask` starts a new task that carries over a summary of the current one. See [/newtask](/features/slash-commands/new-task).

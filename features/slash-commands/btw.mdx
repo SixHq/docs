@@ -1,0 +1,28 @@
+---
+title: "/btw Command"
+sidebarTitle: "/btw"
+description: "Ask a side question about what Sixth is doing without interrupting it."
+---
+
+`/btw` lets you ask a quick question about the current task **while Sixth keeps working**. The main task isn't paused, and your question isn't added to its conversation.
+
+```
+/btw why did you pick zod over yup here?
+```
+
+## How it works
+
+- A separate side assistant answers in a small card above the message box. The main task keeps running.
+- The side assistant can see the whole conversation so far. It can also read files on disk to check their current state, and it can see the current Interactive Planning flowchart if one is running.
+- It's read-only: it explains what Sixth is doing, has done or plans to do. It won't write code or change anything. To change course, tell the main task directly.
+- Answers are short by design. Each `/btw` answer is limited to about a minute and a few lookups.
+- You can attach images to a `/btw` question.
+- Starting a new `/btw` cancels the previous one, and you can cancel an answer from its card.
+
+<Note>`/btw` needs an active task. With no task running, it replies that there's nothing to ask about.</Note>
+
+## Good uses
+
+- "/btw what's left on the plan?"
+- "/btw which file holds the rate limiter?"
+- "/btw why is it running the tests again?"

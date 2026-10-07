@@ -1,174 +1,75 @@
-Sixth Rules allow you to provide Sixth with system-level guidance. Think of them as a persistent way to include context and preferences for your projects or globally for every conversation.
+---
+title: "Sixth Rules"
+sidebarTitle: "Sixth Rules"
+description: "Give Sixth persistent guidance for a project or for every conversation."
+---
 
-## Creating a Rule
+Sixth Rules are persistent instructions Sixth follows on every task: your conventions, architecture notes, testing standards, anything you'd otherwise repeat in every prompt. They can apply to one project (workspace rules) or to everything you do (global rules).
 
-You can create a rule by clicking the `+` button in the Rules tab. This will open a new file in your IDE which you can use to write your rule.
+## The Rules, Workflows & Skills menu
 
-<Frame>
-	<img src="https://storage.googleapis.com/sixth_public_images/docs/assets/sixth-rules.png" alt="Create a Rule" />
-</Frame>
+Click the **scales icon** in the message box toolbar to open a menu with three tabs:
 
-Once you save the file:
+- **Rules** — your global and workspace rules.
+- **Workflows** — reusable step-by-step [workflows](/features/slash-commands/workflows) you run with `/filename`.
+- **Skills** — [skills](/features/skills) Sixth can load, plus **Create with AI** and **Create Manually**.
 
--   Your rule will be stored in the `.sixthrules/` directory in your project (if it's a Workspace Rule)
--   Or in the Global Rules directory (if it's a Global Rule):
+On the Rules and Workflows tabs, each file has an on/off switch, an **edit** button that opens it in the editor, and a **delete** button. Each section ends with a **New rule file...** (or **New workflow file...**) row: type a name (`.md`, `.txt` or no extension; no extension becomes `.md`) and press Enter to create it. Turned-off rules stay on disk but aren't sent to the model.
 
-### Global Rules Directory Location
+## Where rules live
 
-The location of your Global Rules directory depends on your operating system:
+| Kind | Location |
+| --- | --- |
+| **Workspace rules** | `.sixthrules` in your project root. Either a single file, or a folder of Markdown files. |
+| **Global rules** | `Documents/Sixth/Rules` in your user folder (`~/Documents/Sixth/Rules` on macOS and Linux). |
+| **Cursor rules** | `.cursorrules` or `.cursor/rules/` in your project, shown with a **Cursor** tag. |
+| **Windsurf rules** | `.windsurfrules` in your project, shown with a **Windsurf** tag. |
 
-| Operating System | Default Location | Notes |
-|------------------|------------------|-------|
-| **Windows** | `Documents\Sixth\Rules` | Uses system Documents folder |
-| **macOS** | `~/Documents/Sixth/Rules` | Uses user Documents folder |
-| **Linux/WSL** | `~/Documents/Sixth/Rules` | May fall back to `~/Sixth/Rules` on some systems |
+Sixth reads Cursor and Windsurf rule files too, so a project that already has them works without changes. Turn them off from the menu if you don't want them applied.
 
-> **Note for Linux/WSL users**: If you don't find your global rules in `~/Documents/Sixth/Rules`, check `~/Sixth/Rules` as the location may vary depending on your system configuration and whether the Documents directory exists.
+You can also ask Sixth to write a rule for you from the current conversation with [`/newrule`](/features/slash-commands/new-rule).
 
-You can also have Sixth create a rule for you by using the [`/newrule` slash command](/features/slash-commands/new-rule) in the chat.
+## Using a `.sixthrules` folder
 
-```markdown Example Sixth Rule Structure [expandable]
+For more than one rule, make `.sixthrules` a folder. Sixth combines every Markdown file in it:
+
+```
+your-project/
+├── .sixthrules/
+│   ├── 01-coding.md
+│   ├── 02-testing.md
+│   └── current-sprint.md
+├── src/
+└── ...
+```
+
+Number prefixes are optional; they just keep the files in order. With a folder you can switch individual rules on and off from the menu, for example a `react.md` rule only for frontend work.
+
+## Example rule
+
+```markdown Example Sixth Rule [expandable]
 # Project Guidelines
 
-## Documentation Requirements
+## Code style
 
--   Update relevant documentation in /docs when modifying features
--   Keep README.md in sync with new capabilities
--   Maintain changelog entries in CHANGELOG.md
+- TypeScript strict mode; no `any`.
+- Prefer composition over inheritance.
+- Follow the error handling pattern in src/utils/errors.ts.
 
-## Architecture Decision Records
+## Testing
 
-Create ADRs in /docs/adr for:
+- Unit tests for business logic, integration tests for API endpoints.
+- Run `npm test` before calling a task done.
 
--   Major dependency changes
--   Architectural pattern changes
--   New integration patterns
--   Database schema changes
-    Follow template in /docs/adr/template.md
+## Documentation
 
-## Code Style & Patterns
-
--   Generate API clients using OpenAPI Generator
--   Use TypeScript axios template
--   Place generated code in /src/generated
--   Prefer composition over inheritance
--   Use repository pattern for data access
--   Follow error handling pattern in /src/utils/errors.ts
-
-## Testing Standards
-
--   Unit tests required for business logic
--   Integration tests for API endpoints
--   E2E tests for critical user flows
+- Update docs/ when a feature changes.
+- Add a CHANGELOG.md entry for user-visible changes.
 ```
 
-### Key Benefits
+## Tips
 
-1. **Version Controlled**: The `.sixthrules` file becomes part of your project's source code
-2. **Team Consistency**: Ensures consistent behavior across all team members
-3. **Project-Specific**: Rules and standards tailored to each project's needs
-4. **Institutional Knowledge**: Maintains project standards and practices in code
-
-Place the `.sixthrules` file in your project's root directory:
-
-```
-your-project/
-├── .sixthrules
-├── src/
-├── docs/
-└── ...
-```
-
-Sixth's system prompt, on the other hand, is not user-editable ([here's where you can find it](https://github.com/sixth/sixth/blob/main/src/core/prompts/system.ts)). For a broader look at prompt engineering best practices, check out [this resource](https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/overview).
-
-### Tips for Writing Effective Sixth Rules
-
--   Be Clear and Concise: Use simple language and avoid ambiguity.
--   Focus on Desired Outcomes: Describe the results you want, not the specific steps.
--   Test and Iterate: Experiment to find what works best for your workflow.
-
-### .sixthrules/ Folder System
-
-```
-your-project/
-├── .sixthrules/              # Folder containing active rules
-│   ├── 01-coding.md          # Core coding standards
-│   ├── 02-documentation.md   # Documentation requirements
-│   └── current-sprint.md     # Rules specific to current work
-├── src/
-└── ...
-```
-
-Sixth automatically processes **all Markdown files** inside the `.sixthrules/` directory, combining them into a unified set of rules. The numeric prefixes (optional) help organize files in a logical sequence.
-
-#### Using a Rules Bank
-
-For projects with multiple contexts or teams, maintain a rules bank directory:
-
-```
-your-project/
-├── .sixthrules/              # Active rules - automatically applied
-│   ├── 01-coding.md
-│   └── client-a.md
-│
-├── sixthrules-bank/          # Repository of available but inactive rules
-│   ├── clients/              # Client-specific rule sets
-│   │   ├── client-a.md
-│   │   └── client-b.md
-│   ├── frameworks/           # Framework-specific rules
-│   │   ├── react.md
-│   │   └── vue.md
-│   └── project-types/        # Project type standards
-│       ├── api-service.md
-│       └── frontend-app.md
-└── ...
-```
-
-#### Benefits of the Folder Approach
-
-1. **Contextual Activation**: Copy only relevant rules from the bank to the active folder
-2. **Easier Maintenance**: Update individual rule files without affecting others
-3. **Team Flexibility**: Different team members can activate rules specific to their current task
-4. **Reduced Noise**: Keep the active ruleset focused and relevant
-
-#### Usage Examples
-
-Switch between client projects:
-
-```bash
-# Switch to Client B project
-rm .sixthrules/client-a.md
-cp sixthrules-bank/clients/client-b.md .sixthrules/
-```
-
-Adapt to different tech stacks:
-
-```bash
-# Frontend React project
-cp sixthrules-bank/frameworks/react.md .sixthrules/
-```
-
-#### Implementation Tips
-
--   Keep individual rule files focused on specific concerns
--   Use descriptive filenames that clearly indicate the rule's purpose
--   Consider git-ignoring the active `.sixthrules/` folder while tracking the `sixthrules-bank/`
--   Create team scripts to quickly activate common rule combinations
-
-The folder system transforms your Sixth rules from a static document into a dynamic knowledge system that adapts to your team's changing contexts and requirements.
-
-### Managing Rules with the Toggleable Popover
-
-To make managing both single `.sixthrules` files and the folder system even easier, Sixth v3.13 introduces a dedicated popover UI directly accessible from the chat interface.
-
-Located conveniently under the chat input field, this popover allows you to:
-
--   **Instantly See Active Rules:** View which global rules (from your user settings) and workspace rules (`.sixthrules` file or folder contents) are currently active.
--   **Quickly Toggle Rules:** Enable or disable specific rule files within your workspace `.sixthrules/` folder with a single click. This is perfect for activating context-specific rules (like `react-rules.md` or `memory-bank.md`) only when needed.
--   **Easily Add/Manage Rules:** Quickly create a workspace `.sixthrules` file or folder if one doesn't exist, or add new rule files to an existing folder.
-
-This UI significantly simplifies switching contexts and managing different sets of instructions without needing to manually edit files or configurations during a conversation.
-
-<Frame>
-	<img src="https://storage.googleapis.com/sixth_public_images/docs/assets/image%20(1).png" alt="Sixth Logo" />
-</Frame>
+- **Be specific.** "Use Zod for request validation in src/api" beats "validate inputs".
+- **Describe outcomes,** not step-by-step procedures. Procedures belong in [workflows](/features/slash-commands/workflows) or [skills](/features/skills).
+- **Commit workspace rules** so your whole team gets the same behaviour.
+- **Keep them short.** Rules are sent with every request, so trim anything Sixth no longer needs.

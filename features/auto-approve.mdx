@@ -1,59 +1,41 @@
-The Auto Approve menu lets you set fine-grained permissions on what you allow Sixth to do in an automated way.
+---
+title: "Auto-Approve"
+sidebarTitle: "Auto-Approve"
+description: "Choose which actions Sixth can take without asking."
+---
 
-<Frame>
-	<img src="https://storage.googleapis.com/sixth_public_images/docs/assets/auto-approve.png" alt="Auto Approve" />
-</Frame>
+Auto-approve lets Sixth take certain actions without stopping for your OK. Anything not auto-approved shows an [approval card](/features/chat-interface#approval-cards) in the chat, which you answer with **Enter** (approve) or **Esc** (reject).
 
-## How it works
+## Opening the settings
 
-By default, Sixth will ask for your permission before calling any tool, including reading or writing files.
+Click the **shield** in the bottom row of the message box. Next to it is a short summary of what's currently auto-approved, for example **Read, Safe Commands**, **All**, **None** or **Off**. Click it to open the menu.
 
-If you want to allow Sixth to do something without asking, you can set the Auto Approve permission for that tool.
+## Actions
 
-## Permission Options
+| Action | What it allows |
+| --- | --- |
+| **Read project files** | Read files in your workspace. Its sub-option **Read all files** extends this to any file on your computer. |
+| **Edit project files** | Modify files in your workspace. Its sub-option **Edit all files** extends this to any file on your computer. |
+| **Execute safe commands** | Run terminal commands the model judges non-destructive. Its sub-option **Execute all commands** allows any command; use at your own risk. |
+| **Use the browser** | Launch and interact with websites in a browser, and fetch web pages. |
+| **Search the web** | Search the web for information without opening a browser. |
+| **Use MCP servers & Workflows** | Use your MCP servers and connected [workflow integrations](/features/workflow-integrations) (Gmail, Drive, …), which may change files or call external APIs. |
+| **Generate images** | Create AI images without asking. |
 
--   **Read project files**
+**Enable auto-approve** turns the whole feature on or off without losing your choices, and **Toggle all** switches every action at once. Star an action to keep it in your favourites for quick access.
 
-    -   Allows Sixth to read files within your current workspace without asking
-    -   **Read all files**
-        -   Extends read permission to files outside your workspace (system files, config files, etc.)
+New installs start with **Read project files** and **Execute safe commands** on.
 
--   **Edit project files**
+Some low-risk actions never need approval, such as loading a skill, checking on or stopping a background agent, and waiting.
 
-    -   Allows Sixth to modify files within your current workspace without confirmation
-    -   **Edit all files**
-        -   Extends modification permission to files outside your workspace
+## Max requests
 
--   **Execute safe commands**
+By default there's no limit: Sixth keeps working for as many requests as a task needs. If you'd like it to pause and check in, enter a number under **Max Requests**. Sixth stops after that many consecutive auto-approved requests and asks before continuing. Clear the field to go back to unlimited.
 
-    -   Allows execution of terminal commands that the model deems non-destructive
-    -   **Execute all commands**
-        -   Permits execution of any terminal command without asking
+## Suggested setups
 
--   **Use the browser**
+- **Careful:** read files only. You review every edit and command.
+- **Balanced:** read files, edit project files and run safe commands. [Checkpoints](/features/checkpoints) let you undo anything you don't like.
+- **Hands-off:** everything on, for prototyping or tasks you trust Sixth to run alone.
 
-    -   Allows Sixth to use the browser tool to fetch web content
-
--   **Use MCP servers**
-
-    -   Permits connection to and usage of MCP servers for extended functionality
-
--   **Maximum requests**
-    -   Sets the number of consecutive automated actions Sixth can take before requiring your input
-
-## Best Practices
-
-Personally, I like to keep auto-editing disabled because it gives me a chance to review changes every step of the way.
-
-For most serious development workflows, I recommend starting with:
-
--   Auto-approving read access to project files
--   Setting a reasonable maximum request limit (10-20)
-
-This gives Sixth enough freedom to explore your codebase without constant interruptions, while still requiring permission for edits or potentially destructive actions.
-
-As you build more trust in Sixth's capabilities with your specific projects, you can gradually increase the permissions to match your comfort level.
-
-Remember that you can always adjust these settings as your needs change - tighten permissions for critical production work, or loosen them when prototyping and exploring.
-
-You can even use the quick "star" actions to quickly toggle your auto-approved selections on and off as you go.
+You can change these at any time, even mid-task.

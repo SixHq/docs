@@ -1,0 +1,88 @@
+---
+title: "The Chat Interface"
+sidebarTitle: "Chat Interface"
+description: "A tour of the Sixth chat panel: the task header, transcript, approvals and the message box."
+---
+
+Sixth's chat is built to show as much of the work as possible in a small panel. Every step is a single line you can expand, approvals appear right where they're needed, and the message box holds your mode, model and plan.
+
+## Welcome screen
+
+When no task is open you'll see:
+
+- **What's new** — a short carousel of recent features. It advances on its own and pauses while you hover; use the arrows to step through. Some items have a button that opens the feature directly (for example, **Try it out now** for Design Studio).
+- **Recent** — your latest tasks with when they ran, token usage and size. Click one to reopen it, or click **View all** for the full [history](/getting-started/task-management). Starred tasks show a star.
+
+## Task header
+
+The top line of an open task shows:
+
+- **Status dot** — amber while Sixth is waiting for you, pulsing while it's working, and a green check when the task is complete.
+- **Task title** — click it to open the task details.
+- **Context ring** — how much of the model's context window the task is using. It turns amber as it gets close to full.
+- **History**, **New task (+)** and a **⋯** menu with Copy task, MCP servers, Account, Settings, Close task and Delete task.
+
+Clicking the title or the context ring opens a details panel with the full task text, token and cache usage, a context bar, and an **Activity** strip showing each step (reads, edits and commands). Click a step to jump to it in the transcript.
+
+## The transcript
+
+### Tool steps
+
+Each action Sixth takes is one compact line, such as **Read** `auth.ts`, **Edited** `auth.ts +7 −2`, **Ran** `npm test`, **Searched** `login` or **Listed** `src/`. A spinner shows while a step is running.
+
+Click a line to expand it:
+
+- **Edits and new files** show the diff, with **Open** and **Copy** buttons.
+- **Commands** show their output (shown automatically while a command is still running).
+- **Searches and listings** show the results.
+- **Images and SVGs** show a preview.
+
+Clicking a **Read** line opens that file in the editor.
+
+### Approval cards
+
+When Sixth needs permission, for example to run a command, edit a file or call an MCP tool, it shows a card with exactly what it wants to do (the command, the diff, the URL) and two buttons. Press **Enter** to approve or **Esc** to reject, or click the buttons. To say something different instead, just type a reply in the message box.
+
+Actions you've [auto-approved](/features/auto-approve) skip the card.
+
+### Thinking
+
+When a model reasons before answering, a **Thinking** line shows its latest thought live. Afterwards it collapses to **Thought for Ns**; click it to read the full reasoning.
+
+### Questions
+
+If Sixth needs a decision, it asks with a numbered list of options. Press the number key or click an option, or type your own answer.
+
+### Sub-agents and background work
+
+When Sixth splits work across [sub-agents](/features/sub-agents), a **Sub-agents** group shows each one's live activity, time and a **Stop** button. [Background agents](/features/background-agents) and long-running shells are listed under **Agents & shells** just above the message box.
+
+### Checkpoints
+
+A thin **Checkpoint** line appears after each change, with **Compare** and **Restore** buttons. See [Checkpoints](/features/checkpoints).
+
+### Completion
+
+When Sixth finishes, it shows **Task completed** with a summary and thumbs up/down for feedback. If files changed, click **Review changes** to see everything in a diff view.
+
+### Your messages
+
+Your messages appear on the right. Click one to edit it and resend from that point. **Enter** restores just the chat, while **⌘/Ctrl + Enter** (**Restore all**) also restores your files. See [Editing messages](/features/editing-messages).
+
+## The message box
+
+- **Plan strip** — when Sixth is following a task list, a progress strip at the top shows how many steps are done and the current one. Click it to see the full list; the pencil icon opens the list for editing.
+- **Mode** — **Act**, **Plan** or **Explore**. Press `⌘/Ctrl + Shift + A` to cycle. See [Plan, Act & Explore](/features/plan-and-act).
+- **Model** — opens the [model picker](/getting-started/model-selection-guide).
+- **Shield** — shows what's auto-approved (for example "Read, Edit") and opens the [auto-approve](/features/auto-approve) settings.
+- **Rules** (scales icon) — Rules, Workflows and Skills. See [Sixth Rules](/features/sixth-rules).
+- **@** — add context: files, folders, problems, terminal output, git or URLs. See [@ Mentions](/features/at-mentions/overview).
+- **+** — attach files and images.
+- **Design Studio** (palette icon) — opens [Design Studio](/features/design-studio).
+- **Send / Stop** — while Sixth is working, the send button becomes **Stop**. If you type while it's working, your message is queued and Sixth reads it on its next turn.
+
+Type `/` to see [slash commands](/features/slash-commands/slash-commands).
+
+## Scrolling
+
+The chat follows new output automatically. Scroll up to read earlier steps and it stays where you put it; scroll back to the bottom, or click the **↓** button, to follow again. Very long tasks hide their oldest messages behind a **show more** row so the panel stays fast.

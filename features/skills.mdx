@@ -1,0 +1,53 @@
+---
+title: "Skills"
+sidebarTitle: "Skills"
+description: "Reusable instruction sets that teach Sixth specific workflows."
+---
+
+A **skill** is a reusable set of instructions that teaches Sixth how to do something specific: a release process, a document format, a testing routine, a design style. Skills load only when they're needed, so you can install many of them without bloating every request.
+
+## How skills work
+
+- Sixth always knows each installed skill's **name and description**.
+- When a request matches a skill, or you ask for one directly, Sixth loads that skill's full instructions with the `use_skill` tool and follows them.
+- To call a skill yourself, type `/` followed by its name in the chat, for example `/release-notes`. Skills appear in the `/` menu.
+
+## Skill folders
+
+Each skill is a folder with a `SKILL.md` file. Optional `scripts/`, `references/` and `assets/` folders can hold supporting files.
+
+```
+~/.claude/skills/
+  release-notes/
+    SKILL.md
+    scripts/
+    references/
+```
+
+`SKILL.md` starts with YAML frontmatter, followed by the instructions in markdown:
+
+```markdown
+---
+name: release-notes
+description: Draft release notes from merged PRs since the last tag.
+---
+1. Find the latest tag with `git describe --tags --abbrev=0`.
+2. ...
+```
+
+Sixth loads skills from **`~/.claude/skills/`** in your home folder. The same skills are available in every project.
+
+## Managing skills
+
+Click the **Rules & Workflows** button (the scales icon) in the message box toolbar and open the **Skills** tab. There you can:
+
+- See every available skill under **Available Skills**, with its description.
+- Switch a skill off to stop Sixth from using it, or back on.
+- **Create with AI**: start a task where Sixth helps you design a new skill and writes the whole folder into `~/.claude/skills/`.
+- **Create Manually**: start a task where Sixth shows you the `SKILL.md` format and walks you through setting up the folder yourself.
+
+## The skill-creator skill
+
+Sixth installs a built-in **skill-creator** skill, marked **built-in** in the list. It guides the creation of new skills and can't be switched off.
+
+<Tip>A good description matters most. Sixth decides when to load a skill from its description, so say what the skill does *and* when to use it.</Tip>

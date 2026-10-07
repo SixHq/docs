@@ -1,0 +1,32 @@
+---
+title: "Slash Commands"
+sidebarTitle: "Overview"
+description: "Every built-in slash command, plus how your workflows and skills become commands."
+---
+
+Type `/` at the start of a message to open the command menu. Keep typing to filter, use the arrow keys to move, and press Enter or Tab to insert a command. The menu has three sections: built-in commands, your **workflows**, and your **skills**.
+
+## Built-in commands
+
+| Command | What it does |
+| --- | --- |
+| `/btw` | Ask a side question about what the agent is doing, without interrupting the task. See [/btw](/features/slash-commands/btw). |
+| `/agents` | Open the Agents & shells panel to view and manage your [background agents](/features/background-agents). See [/agents](/features/slash-commands/agents). |
+| `/newtask` | Start a new task carrying over context from the current one. See [/newtask](/features/slash-commands/new-task). |
+| `/smol` | Condense the current context window (`/compact` works too). See [/smol](/features/slash-commands/smol). |
+| `/deep-planning` | Investigate the codebase thoroughly and write an implementation plan before coding. See [/deep-planning](/features/slash-commands/deep-planning). |
+| `/newrule` | Create a new [Sixth rule](/features/sixth-rules) from the conversation. See [/newrule](/features/slash-commands/new-rule). |
+| `/reportbug` | Create a GitHub issue with Sixth. See [/reportbug](/features/slash-commands/report-bug). |
+| `/interactive-planning` | Plan the task as an interactive flowchart before any code is written. See [Interactive planning](/features/interactive-planning). |
+| `/generate-image` | Generate an image and save it to your project. Add a description after the command as a hint. See [Image generation](/features/image-generation). |
+| `/design-studio` | Open [Design Studio](/features/design-studio) to pick a designer-made theme to build with. |
+
+You can add text after a command; Sixth uses it together with the command. For example: `/generate-image a minimal mountain logo in navy`.
+
+## Workflows
+
+Every enabled [workflow](/features/slash-commands/workflows) appears in the menu under its file name, including the extension, for example `/release.md`. Running it gives Sixth that file's steps to follow. If a workspace workflow and a global workflow share a name, the workspace one wins.
+
+## Skills
+
+Every available [skill](/features/skills) appears in the menu as `/skill-name`. Running it tells Sixth to load that skill's instructions and follow them for your request. Sixth can also pick a skill on its own when one fits the task.

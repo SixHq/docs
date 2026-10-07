@@ -1,0 +1,31 @@
+---
+title: "/deep-planning Command"
+sidebarTitle: "/deep-planning"
+description: "Have Sixth investigate the codebase and write a full implementation plan before coding."
+---
+
+`/deep-planning` tells Sixth to understand your codebase thoroughly and produce a complete implementation plan **before writing any code**. Use it for features that touch many files, risky refactors, or anything where a wrong first step is expensive.
+
+```
+/deep-planning add multi-tenant support to the billing service
+```
+
+## The four steps
+
+1. **Silent investigation.** Sixth reads the relevant source, configuration and docs, and runs read-only commands to map the project structure, definitions, imports, dependencies and existing TODOs. It doesn't change anything.
+2. **Discussion.** Sixth asks only the questions it needs answered, such as unclear requirements, a choice between equally valid approaches, or assumptions about how the system behaves. Questions are brief and come one at a time.
+3. **The plan document.** Sixth writes `implementation_plan.md` with these sections:
+   - **Overview**: the goal, scope and overall approach
+   - **Types**: new or changed types, interfaces and data structures
+   - **Files**: files to create, modify, delete or move, including config
+   - **Functions**: signatures, purpose and key details of new or changed functions
+   - **Changes**: the step-by-step implementation order
+   - **Tests**: unit and integration tests, test data and edge cases
+4. **The implementation task.** Sixth uses `new_task` to start a fresh task that carries the plan and a step-by-step checklist (see [Focus Chain](/features/focus-chain)). The new task reads the plan section by section as it implements.
+
+<Tip>Review `implementation_plan.md` before you approve the new task. Editing the plan is the cheapest point to change direction.</Tip>
+
+## Related
+
+- [Interactive Planning](/features/interactive-planning) (`/interactive-planning`): plans the task as an interactive flowchart before running it.
+- [Plan & Act](/features/plan-and-act): switch to Plan mode to discuss an approach without a formal plan document.

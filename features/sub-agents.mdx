@@ -1,0 +1,41 @@
+---
+title: "Sub-Agents"
+sidebarTitle: "Sub-Agents"
+description: "How Sixth splits multi-part work across parallel sub-agents."
+---
+
+For work that splits into independent parts, Sixth can spawn **1 to 5 sub-agents** that work at the same time in the same workspace. Each sub-agent takes one part. When all of them finish, Sixth gets their combined results and continues. For multi-part work this is much faster than doing each part in turn.
+
+You don't need to set anything up: Sixth decides when to use sub-agents, using the `spawn_agents` tool. Sub-agents are different from [Background Agents](/features/background-agents), which are specialists *you* define and that keep running while the main task continues. A sub-agent is temporary and Sixth waits for it to finish.
+
+## When Sixth uses them
+
+Typical cases are tasks with clearly separate pieces, such as:
+
+- Adding the same kind of change across several unrelated modules or routes.
+- Building several independent components or pages.
+- Investigating different parts of a codebase at once.
+
+Sixth gives each sub-agent detailed instructions (exact files, patterns to follow, how its part connects to the others) plus the project's tech stack and conventions. Sub-agents know only what Sixth tells them.
+
+## What sub-agents can do
+
+Each sub-agent can read, search and list files, read several files at once, write and edit files, create SVG or ICO files, delete files, run commands, and check background shells it started. When it's done it reports a short result back to Sixth.
+
+## Following along in the chat
+
+While sub-agents work, the chat shows a **Sub-agents** group with a summary such as "1 of 3 done". Each sub-agent gets its own row with:
+
+- a status icon: a spinner while working, then done, failed or timed out
+- its name
+- what it's doing right now
+- how long it has been running
+- a **Stop** button while it's running
+
+When a sub-agent finishes, click its row to see its result, the files it changed and its token usage.
+
+## Limits
+
+- At most **5** sub-agents run at the same time.
+- A single sub-agent can run for up to 4 hours.
+- Starting sub-agents is auto-approved whenever any auto-approve action is turned on.

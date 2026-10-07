@@ -1,139 +1,87 @@
 ---
 title: "Sixth Tools Reference Guide"
+sidebarTitle: "Tools Reference"
+description: "Every tool Sixth can use, and what each one does."
 ---
 
-## What Can Sixth Do?
+Sixth works by calling tools: reading files, editing code, running commands, browsing, delegating to agents and more. Each tool use appears in the chat as a compact row you can expand to see the details: diffs, command output, search results, images.
 
-Sixth is your AI assistant that can:
+Depending on your [auto-approve](/features/auto-approve) settings, a tool either runs straight away or shows an approval card with **Run** / **Reject** (press **Enter** to approve or **Esc** to reject).
 
--   Edit and create files in your project
--   Run terminal commands
--   Search and analyze your code
--   Help debug and fix issues
--   Automate repetitive tasks
--   Integrate with external tools
+## Reading & exploring code
 
-## First Steps
+| Tool | What it does |
+| --- | --- |
+| `read_file` | Reads a file. Extracts the text from PDF and DOCX files too. |
+| `read_batch` | Reads several files at once (much faster than one by one). A line can also start with `list:` to list a folder or `defs:` to list the code definitions in it. |
+| `read_file_in_chunks` | Reads a very large file in 500 KB chunks. Plain reads are capped at 5 MB, so larger files are read this way. |
+| `list_files` | Lists a folder's contents, top level or recursively. |
+| `search_files` | Regex search across files, with surrounding context lines. |
+| `list_code_definition_names` | Lists the classes, functions and methods defined in a folder's source files. |
 
-1. **Start a Task**
+## Editing files
 
-    - Type your request in the chat
-    - Example: "Create a new React component called Header"
+| Tool | What it does |
+| --- | --- |
+| `write_to_file` | Creates a file or overwrites it with complete new content. |
+| `append_to_file` | Adds content to the end of a file, used to write very large files in parts. |
+| `replace_in_file` | Makes targeted edits with SEARCH/REPLACE blocks. |
+| `delete_file` | Deletes a file, for example a temporary script. |
+| `create_svg_or_dot_ico` | Creates or edits `.svg` and `.ico` files directly. The chat shows a live preview. |
 
-2. **Provide Context**
+Every edit shows a diff in the chat. With [checkpoints](/features/checkpoints) you can compare or roll back any step.
 
-    - Use @ mentions to add files, folders, or URLs
-    - Example: "@file:src/components/App.tsx"
+## Terminal
 
-3. **Review Changes**
-    - Sixth will show diffs before making changes
-    - You can edit or reject changes
+| Tool | What it does |
+| --- | --- |
+| `execute_command` | Runs a terminal command. Commands that start a server or watcher run as [background shells](/features/background-shells). |
+| `access_launched_terminal_task` | Checks a background shell: whether it's running, its pid, exit code, uptime and latest output. |
+| `wait_until` | Pauses for 1–300 seconds, for example while a build or server starts. |
 
-## Key Features
+## Web, images & browser
 
-1. **File Editing**
+| Tool | What it does |
+| --- | --- |
+| `web_search` | Searches the web for current information, docs or error solutions. |
+| `web_fetch` | Fetches a web page and converts it to markdown. |
+| `view_image` | Fetches an image from a URL so Sixth can look at it. |
+| `generate_image` | Generates a custom image (logo, background, design asset) and saves it to your project. Also available as `/generate-image`. |
+| `browser_action` | Drives a browser: launch a URL, click, type, scroll and take screenshots to test what it built. See [Remote Browser Support](/exploring-sixth-tools/remote-browser-support). |
 
-    - Create new files
-    - Modify existing code
-    - Search and replace across files
+## Design
 
-2. **Terminal Commands**
+| Tool | What it does |
+| --- | --- |
+| `launch_design_studio` | Opens [Design Studio](/features/design-studio) so you can pick a designer-made theme before Sixth builds a frontend. Also available as `/design-studio`. |
+| `get_design_spec` | Loads the full build brief for a Design Studio design: tokens, fonts, layouts, voice, imagery and motion rules. |
 
-    - Run npm commands
-    - Start development servers
-    - Install dependencies
+## Agents & skills
 
-3. **Code Analysis**
+| Tool | What it does |
+| --- | --- |
+| `spawn_agents` | Runs 1–5 [sub-agents](/features/sub-agents) in parallel on independent parts of a task, then gathers their results. |
+| `launch_agent` | Hands a task to one of your [background agents](/features/background-agents). It returns right away and the result arrives later. |
+| `get_dedicated_agent_progress` | Checks the status, recent activity and result of background agent runs. |
+| `stop_dedicated_agent` | Stops a background agent run. You can resume it later from the Agents dock. |
+| `use_skill` | Loads a [skill](/features/skills)'s full instructions when it's relevant or when you call it with `/skill-name`. |
 
-    - Find and fix errors
-    - Refactor code
-    - Add documentation
+## MCP
 
-4. **Browser Integration**
-    - Test web pages
-    - Capture screenshots
-    - Inspect console logs
+| Tool | What it does |
+| --- | --- |
+| `use_mcp_tool` | Calls a tool on a connected [MCP server](/mcp/mcp-overview). |
+| `access_mcp_resource` | Reads a resource from a connected MCP server. |
+| `load_mcp_documentation` | Loads instructions for building or installing an MCP server. |
 
-## Available Tools
+## Conversation & task flow
 
-For the most up-to-date implementation details, you can view the full source code in the [Sixth repository](https://github.com/sixth/sixth/blob/main/src/core/Sixth.ts).
-
-Sixth has access to the following tools for various tasks:
-
-1. **File Operations**
-
-    - `write_to_file`: Create or overwrite files
-    - `read_file`: Read file contents
-    - `replace_in_file`: Make targeted edits to files
-    - `search_files`: Search files using regex
-    - `list_files`: List directory contents
-
-2. **Terminal Operations**
-
-    - `execute_command`: Run CLI commands
-    - `list_code_definition_names`: List code definitions
-
-3. **MCP Tools**
-
-    - `use_mcp_tool`: Use tools from MCP servers
-    - `access_mcp_resource`: Access MCP server resources
-    - Users can create custom MCP tools that Sixth can then access
-    - Example: Create a weather API tool that Sixth can use to fetch forecasts
-
-4. **Interaction Tools**
-    - `ask_followup_question`: Ask user for clarification
-    - `attempt_completion`: Present final results
-
-Each tool has specific parameters and usage patterns. Here are some examples:
-
--   Create a new file (write_to_file):
-
-    ```xml
-    <write_to_file>
-    <path>src/components/Header.tsx</path>
-    <content>
-    // Header component code
-    </content>
-    </write_to_file>
-    ```
-
--   Search for a pattern (search_files):
-
-    ```xml
-    <search_files>
-    <path>src</path>
-    <regex>function\s+\w+\(</regex>
-    <file_pattern>*.ts</file_pattern>
-    </search_files>
-    ```
-
--   Run a command (execute_command):
-    ```xml
-    <execute_command>
-    <command>npm install axios</command>
-    <requires_approval>false</requires_approval>
-    </execute_command>
-    ```
-
-## Common Tasks
-
-1. **Create a New Component**
-
-    - "Create a new React component called Footer"
-
-2. **Fix a Bug**
-
-    - "Fix the error in src/utils/format.ts"
-
-3. **Refactor Code**
-
-    - "Refactor the Button component to use TypeScript"
-
-4. **Run Commands**
-    - "Run npm install to add axios"
-
-## Getting Help
-
--   [Join the Discord community](https://discord.gg/sixth)
--   Check the documentation
--   Provide feedback to improve Sixth
+| Tool | What it does |
+| --- | --- |
+| `ask_followup_question` | Asks you a question, optionally with 2–5 answers you can pick (press 1–N to choose). |
+| `plan_mode_respond` | Replies in Plan mode, used to discuss and agree on an approach before any changes. |
+| `explore_mode_respond` | Replies in Explore mode, which is for deep investigation of a codebase. |
+| `attempt_completion` | Presents the finished result. It can include a command to show it, such as opening the page Sixth built. |
+| `new_task` | Starts a new task that carries a summary of the current one (`/newtask`). |
+| `condense` | Summarises the conversation to free up context (`/smol`). |
+| `report_bug` | Drafts a GitHub issue (`/reportbug`). |
